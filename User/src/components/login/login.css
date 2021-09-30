@@ -1,0 +1,177 @@
+/*------------------------Login Admin-----------------------*/
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background:#047FEA;
+}
+.login-container {
+    width: 70%;
+    margin: 0 auto;
+    border-radius: 5px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.login-left {
+    width: 50%;
+}
+.login-right {
+    width: 50%;
+    /* border: 1px solid red; */
+}
+
+.login-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 5px 0 0 5px;
+}
+.login-right-content {
+    width: 80%;
+    margin: 0 auto;
+}
+.login-right h1 {
+    color: #333;
+    text-align: center;
+}
+
+.login-right .inputText {
+    border: none;
+    border: 2px solid #eeeeee;
+    border: 2px solid #D1D3E2;
+}
+
+.btn-login {
+    margin-top: 20px;
+    padding: 14px;
+    font-size: 16px;
+}
+.btn-login-container .lds-facebook div {
+    background: #3D3DF3;
+}
+
+/*------------------------Login User-----------------------*/
+.sign-in {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid red; */
+     padding: 30px 0;
+     height: 100vh;
+     background: #F0F2F5;
+  }
+  .sign-in-container h1 {
+    text-align: center;
+    margin-bottom: 16px;
+    color: #3D3DF3;
+    font-size: 40px;
+  }
+  .sign-in-model {
+    background: #fff;
+    /* border: 1px solid #000; */
+    padding: 35px 45px;
+    border-radius: 5px;
+   box-shadow: 0 0 30px 0 #dddddd;
+  }
+  .sign-in-model h2 {
+    margin-bottom: 16px;
+    text-align: center;
+    color: #3E415C;
+    font-weight: normal;
+  }
+  .sign-in-model .p-msg {
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 10px;
+    padding: 14px 0;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+   
+  .input-div {
+    /* border: 1px solid #000; */
+    margin-bottom: 15px;
+  }
+  .input-container {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    width: 300px;
+    margin-bottom: 3px;
+    background: #F6F6F7;
+    padding: 16px 10px;
+    border-radius: 5px;
+    border: 2px solid #fff;
+    /* background: red; */
+    
+  }
+  .input-container:nth-last-of-type(2) {
+    margin-bottom:38px ;
+  }
+  
+  .icon {
+    padding: 10px;
+    text-align: center;
+    color: #97959D;
+    font-size: 14px;
+  }
+
+  .i-icon {
+    /* padding: 10px; */
+    margin-right: 8px;
+    text-align: center;
+    color: #97959D;
+    font-size: 18px !important;
+  }
+  
+  .input-field {
+    width: 100%;
+    outline: none;
+    border: none;
+    background: #F6F6F7;
+  }
+  
+  
+  .input-container:focus-within {
+    /* border: 2px solid #2B4EFF; */
+    border: 2px solid rgb(61, 61, 243);
+  }
+  
+  .sign-in-model label {
+    font-size: 14px;
+    color: #3E415C;
+    /* font-weight: bold; */
+  }
+  .sign-in-model .input-div p {
+    font-size: 14px;
+    color: red;
+  }
+  .sign-in-model .btn-container p {
+    font-size: 14px;
+    text-align: center;
+    color: #97959D;
+    margin-top: 12px;
+  }
+  .sign-in-model .btn-container p span {
+    /* color: #3B5BFF; */
+    color: rgb(61, 61, 243);
+  }
+  
+  
+  .input-test {
+    border: 2px solid red;
+  }
+  .input-test:focus-within {
+    border: 2px solid red;
+  }
+
+  .btn-login-user {
+      padding: 12px;
+  }
+
+  .sign-in .btn-container .lds-facebook div {
+    background: #3D3DF3;
+}

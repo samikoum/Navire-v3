@@ -1,0 +1,33 @@
+.coll-2-container-dashboard {
+    background: #F6F6F6;
+}
+
+.recharts {
+    background: #F6F6F6;
+    /* border: 1px solid red; */
+    /* max-width: 1000px; */
+}
+.recharts__1 {
+    display: flex;
+}
+.recharts__1 .graph-1 {
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+.recharts__1 .graph-2 {
+    margin-bottom: 30px;
+}
+.graph {
+    background: red;
+    background: #fff;
+    padding: 20px 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 #dddddd;
+}
+
+.dash-flex-container {
+    /* border: 1px solid red; */
+    /* max-width: 1100px; */
+}
+
+

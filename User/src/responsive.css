@@ -1,0 +1,275 @@
+/*----------------responsive------------------------*/
+@media only screen and (min-width: 951px) {
+  .coll-2-header .fa-bars {
+    display: none;
+  }
+  .coll-2-header .i-mui {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1100px) and (max-width:1500px) {
+   
+    .coll-2-header {
+      background: purple;
+    }
+    .coll-1 {
+      display: block;
+      position: fixed;
+      height: 100vh;
+      width: 235px;
+      z-index: 101;
+    }
+    .coll-2 {
+      width: 100%;
+      margin-left: 235px;
+    }
+   
+    .coll-2-container form {
+      width: 65%;
+      /* margin: 0 auto; */
+    }
+    .btn-containers {
+      width: 65%;
+      /* margin: 0 auto; */
+      /* border: 1px solid red; */
+    }
+  /*---------login page----------*/
+    .login-container {
+      /* flex-direction: column; */
+      width: 80%;
+    }
+    .login-left {
+      width: 100%;
+    }
+    .login-right {
+      width: 100%;
+      padding: 30px 0;
+    }
+    .login-right .btn-login {
+      margin-top: 0px;
+    }
+    
+  }
+  @media only screen and (max-width: 1200px) {
+    .coll-2-header {
+      background: chartreuse;
+    }
+    .coll-2-container form {
+      width: 70%;
+      /* margin: 0 auto; */
+    }
+    .btn-containers {
+      width: 70%;
+      /* margin: 0 auto; */
+      /* border: 1px solid red; */
+    }
+    .dash-box-1 {
+      width: 260px;
+      margin-right: 16px;
+    }
+  }
+  
+  @media only screen and (max-width: 1100px) {
+   
+    .coll-2-header {
+      background: yellow;
+    }
+  .coll-2-container form {
+    width: 85%;
+    margin: 0 auto;
+  }
+
+  .btn-containers {
+    width: 85%;
+    margin: 0 auto;
+    /* border: 1px solid red; */
+  }
+  .dash-box-1 {
+    width: 210px;
+    margin-right: 16px;
+  }
+  .dash-box-1 .dash-flex-left i {
+    font-size: 65px;
+  }
+   /*---------login page----------*/
+   /* .login {
+    background: yellow;
+  }  */
+   .login-container {
+    /* flex-direction: column; */
+    width: 80%;
+  }
+  .login-left {
+    width: 100%;
+  }
+  .login-right {
+    width: 100%;
+    padding: 30px 0;
+  }
+  .login-right .btn-login {
+    margin-top: 0px;
+  }
+  }
+  
+  @media only screen and (max-width: 950px) {
+  .coll-2-header {
+    background: red;
+  }
+  .coll-1 {
+    display: none;
+    position: fixed;
+    width: 235px !important;
+    height: 100vh;
+    z-index: 101;
+  }
+  .coll-2 {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+  .coll-2-container form {
+    width: 85%;
+    margin: 0 auto;
+  }
+  .btn-containers {
+    width: 85%;
+    margin: 0 auto;
+    /* border: 1px solid red; */
+  }
+  .dash-box-1 {
+    width: 240px;
+    margin-right: 16px;
+  }
+  .dash-box-1 .dash-flex-left i {
+    font-size: 65px;
+  }
+   /*---------login page----------*/
+   /* .login {
+    background: red;
+  } */
+   .login-container {
+    flex-direction: column;
+    width: 70%;
+  }
+  .login-left {
+    width: 100%;
+  }
+  .login-left img {
+   display: none;
+  }
+
+  .login-right {
+    width: 100%;
+    padding: 30px 0;
+  }
+  .login-right .btn-login {
+    margin-top: 0px;
+  }
+  }
+  @media only screen and (max-width: 800px) {
+    .coll-2-header {
+      background: orange;
+    }
+
+    .coll-2-container form {
+      width: 86%;
+      margin: 0 auto;
+    }
+    .btn-containers {
+      width: 86%;
+      margin: 0 auto;
+      /* border: 1px solid red; */
+    }
+    .dash-box-1 {
+      width: 210px;
+      margin-right: 13px;
+    }
+    .dash-box-1 .dash-flex-left i {
+      font-size: 60px;
+    }
+
+    }
+  
+  @media only screen and (max-width: 700px) {
+    .coll-2-header {
+      background: blue;
+    }
+    .coll-2-container form {
+      width: 90%;
+      margin: 0 auto;
+    }
+    .btn-containers {
+      width: 90%;
+      margin: 0 auto;
+      /* border: 1px solid red; */
+    }
+    .dash-flex-container {
+      display: block;
+    }
+    .dash-box-1 {
+      width: 80%;
+      margin: 0 auto  40px ;
+    } 
+ 
+  }
+  
+  @media only screen and (max-width: 600px) {
+  
+    .coll-2-header {
+      background: green;
+    }
+ 
+    .coll-2-container form {
+      width: 92%;
+      margin: 0 auto;
+    }
+    .btn-containers {
+      width: 92%;
+      margin: 0 auto;
+      /* border: 1px solid red; */
+    }
+    .dash-flex-container {
+      display: block;
+    }
+    .dash-box-1 {
+      width: 80%;
+      margin: 0 auto  40px ;
+    }
+   
+  }
+  
+  @media only screen and (max-width: 550px) {
+   
+    .coll-2-header {
+      background: violet;
+    }
+    .coll-2-container form {
+      width: 92%;
+      margin: 0 auto;
+    }
+    form .two-input {
+      flex-direction: column;
+    }
+    .btn-containers {
+      width: 92%;
+      margin: 0 auto;
+      /* border: 1px solid red; */
+    }
+    .dash-flex-container {
+      display: block;
+    }
+    .dash-box-1 {
+      width: 85%;
+      margin: 0 auto  40px ;
+    }
+    /*---------login page----------*/
+    /* .login {
+      background: violet;
+    } */
+    .login-container {
+      flex-direction: column;
+      width: 80%;
+    }
+  
+  
+  }
+  
