@@ -454,7 +454,22 @@ tr:nth-child(2n) {
 .reclamation-table thead {
   border: 1px solid #dddddd; 
 }
- 
+
+.documents-table tr   {
+  background: #fff;
+  cursor: default !important;
+}
+.documents-table thead {
+  border: 1px solid #dddddd;
+}
+.documents-table tr:nth-child(2n+1):hover {
+  background-color: #fff !important;
+    /* color: unset !important; */
+}
+.documents-table tr:nth-child(2n):hover {
+  background-color: #dddddd !important;
+    color: unset !important;
+}
 
  /* th:first-of-type {
   border-radius: 5px 0 0 0;

@@ -174,7 +174,7 @@ function DocumentUser() {
                     <div className="coll-2-container" >
                         <div className="matrial-table-container reclamation-table">
                             <MaterialTable
-                                title="Gestion des Reclamations"
+                                title="Documents"
                                 columns={columns}
                                 data={documents}
                                 icons={tableIcons}

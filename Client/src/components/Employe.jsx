@@ -131,8 +131,6 @@ function Employe() {
         setemp_id(employe.rg_id)
     }
 
-
-
     return (
         <>
             <Model emp_id={emp_id} listen={listen} setListen={setListen} />

@@ -9,7 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 
 import './adddocs.css'
-function AddDocumentModel() {
+function AddDocumentModel({ listen, setListen }) {
     // useState
     const [file, setFile] = useState();
     const [fileName, setFileName] = useState("");
@@ -44,6 +44,7 @@ function AddDocumentModel() {
             console.log(response.data)
             inputFile.current.value = ""
             reset()
+            setListen(!listen)
             setLoader(false)
             window.alert(response.data)
         }).catch((error) => {

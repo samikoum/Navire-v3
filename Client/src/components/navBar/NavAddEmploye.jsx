@@ -9,6 +9,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import DescriptionIcon from '@mui/icons-material/Description';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -70,7 +71,7 @@ function NavAddEmploye({ current }) {
                     </div>
                 </Link>
                 <Link to="/reclamations">
-                    <div className={current == 'manageReclamations' ? 'current dash' : 'dash'}><ManageAccountsIcon className="i-mui" />
+                    <div className={current == 'manageReclamations' ? 'current dash' : 'dash'}><ReportProblemIcon className="i-mui" />
                         Gestion Reclamations
                     </div>
                 </Link>

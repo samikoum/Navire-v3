@@ -6,180 +6,188 @@ require('dotenv').config()
 
 
 //------------------------------update__1--------------------------------
-router.post('/edit_1',(req,res)=>{
-    const {id} = req.body.id
-    const { matricule  ,prenom , nom,  address   , situation, 
-     nombreEnfants , ascendant  ,      dateNaissance,
-     dateRecrutement , structure , region ,  diplome  , specialite } =  req.body.data
-    //  console.log(req.body.data)
-      //check if there is a user with that matricule
-sql = `SELECT * from rgeneraux where matricule='${matricule}' AND rg_id!=${id}; `
-sql_2 = `SELECT * from rgeneraux where rg_id=${id}`
-con.query(sql+sql_2,(err,select)=>{
- if(err) {
-     console.log(err)
-     return res.status(400).send('Something went wrong !')
- }
- if(select[0].length > 0) {
-     return res.status(401).send('Matricule Already Exists')
- }
+router.post('/edit_1', (req, res) => {
 
-// update data into table
-   sql2 =`UPDATE  rgeneraux SET matricule='${matricule}' , prenom='${prenom}',nom='${nom}',address='${address}',
+    const { id } = req.body.id
+
+    const { matricule, prenom, nom, address, situation,
+        nombreEnfants, ascendant, dateNaissance,
+        dateRecrutement, structure, region, diplome, specialite } = req.body.data
+
+    //check if there is a user with that matricule
+    sql = `SELECT * from rgeneraux where matricule='${matricule}' AND rg_id!=${id}; `
+    sql_2 = `SELECT * from rgeneraux where rg_id=${id}`
+    con.query(sql + sql_2, (err, select) => {
+        if (err) {
+            console.log(err)
+            return res.status(400).send('Something went wrong !')
+        }
+        if (select[0].length > 0) {
+            return res.status(401).send('Matricule Already Exists')
+        }
+
+        // update data into table
+        sql2 = `UPDATE  rgeneraux SET matricule='${matricule}' , prenom='${prenom}',nom='${nom}',address='${address}',
    s_famille='${situation}',n_enfants='${nombreEnfants}',ascendant='${ascendant}',
    date_naissance='${dateNaissance}',date_recrutement='${dateRecrutement}',
    structure='${structure}',region='${region}',diplome='${diplome}',
    specialite='${specialite}' WHERE rg_id='${id}'; `
-   sql22 =`UPDATE ExProfessionnelle SET matricule='${matricule}' WHERE matricule='${select[1][0]['matricule']}'; `
-   sql3 =`UPDATE evocarriere SET matricule='${matricule}' WHERE matricule='${select[1][0]['matricule']}'; `
-   sql4 =`UPDATE formationpro SET matricule='${matricule}' WHERE matricule='${select[1][0]['matricule']}'; `
-   sql5 =`UPDATE RevSalairiale  SET matricule='${matricule}' WHERE matricule='${select[1][0]['matricule']}'; `
-   sql6 =`UPDATE mesures_disc SET matricule='${matricule}' WHERE matricule='${select[1][0]['matricule']}'; `
-   sql7 =`UPDATE assiduite SET matricule='${matricule}' WHERE matricule='${select[1][0]['matricule']}'; `
- 
-  con.query(sql2+sql22+sql3+sql4+sql5+sql6+sql7,(err,update)=>{
-     if (err) {
-      console.log(err)
-      return res.status(402).send('Something went wrong !')
-        }
-        res.json({msg:'Successfully updated'})
- 
-  })
+        sql22 = `UPDATE ExProfessionnelle SET matricule='${matricule}' WHERE matricule='${select[1][0]['matricule']}'; `
+        sql3 = `UPDATE evocarriere SET matricule='${matricule}' WHERE matricule='${select[1][0]['matricule']}'; `
+        sql4 = `UPDATE formationpro SET matricule='${matricule}' WHERE matricule='${select[1][0]['matricule']}'; `
+        sql5 = `UPDATE RevSalairiale  SET matricule='${matricule}' WHERE matricule='${select[1][0]['matricule']}'; `
+        sql6 = `UPDATE mesures_disc SET matricule='${matricule}' WHERE matricule='${select[1][0]['matricule']}'; `
+        sql7 = `UPDATE assiduite SET matricule='${matricule}' WHERE matricule='${select[1][0]['matricule']}'; `
+
+        con.query(sql2 + sql22 + sql3 + sql4 + sql5 + sql6 + sql7, (err, update) => {
+            if (err) {
+                console.log(err)
+                return res.status(402).send('Something went wrong !')
+            }
+            res.json({ msg: 'Successfully updated' })
+
+        })
 
 
-})
+    })
 
 })
 
 //------------------------------update__2--------------------------------
-router.post('/edit_2',(req,res)=>{
-    const {id} = req.body.id
-    const {post, employer, debut, fin } =  req.body.data
-     console.log(req.body.data)
-      //check if there is a user with that matricule
+router.post('/edit_2', (req, res) => {
 
-// update data into table
-sql2 =`UPDATE ExProfessionnelle SET post_oc='${post}',employer='${employer}',
+    const { id } = req.body.id
+
+    const { post, employer, debut, fin } = req.body.data
+
+    //check if there is a user with that matricule
+
+    // update data into table
+    sql2 = `UPDATE ExProfessionnelle SET post_oc='${post}',employer='${employer}',
 date_debut='${debut}',date_fin='${fin}' WHERE exp_id='${id}'`
-  con.query(sql2,(err,update)=>{
-     if (err) {
-      console.log(err)
-      return res.status(402).send('Something went wrong !')
+    con.query(sql2, (err, update) => {
+        if (err) {
+            console.log(err)
+            return res.status(402).send('Something went wrong !')
         }
-        res.json({msg:'Successfully updated'})
- })
- 
+        res.json({ msg: 'Successfully updated' })
+    })
+
 
 })
 
 //------------------------------update__3--------------------------------
-router.post('/edit_3',(req,res)=>{
-    const {id} = req.body.id
-    const {post,structure ,debut ,fin  } =  req.body.data
-     console.log(req.body.data)
-      //check if there is a user with that matricule
+router.post('/edit_3', (req, res) => {
 
-// update data into table
-sql2 =`UPDATE evocarriere SET post_oc='${post}',structure='${structure}',
+    const { id } = req.body.id
+
+    const { post, structure, debut, fin } = req.body.data
+
+    //check if there is a user with that matricule
+
+    // update data into table
+    sql2 = `UPDATE evocarriere SET post_oc='${post}',structure='${structure}',
 date_debut='${debut}',date_fin='${fin}' WHERE evo_id='${id}'`
-  con.query(sql2,(err,update)=>{
-     if (err) {
-      console.log(err)
-      return res.status(402).send('Something went wrong !')
+    con.query(sql2, (err, update) => {
+        if (err) {
+            console.log(err)
+            return res.status(402).send('Something went wrong !')
         }
-        res.json({msg:'Successfully updated'})
- })
- 
+        res.json({ msg: 'Successfully updated' })
+    })
+
 
 })
-
 
 //------------------------------update__4-------------------------------
-router.post('/edit_4',(req,res)=>{
-    const {id} = req.body.id
-    const {intitule,organisme ,date ,duree,titre  } =  req.body.data
-     console.log(req.body.data)
-      //check if there is a user with that matricule
+router.post('/edit_4', (req, res) => {
 
-// update data into table
-sql2 =`UPDATE formationpro SET intitule='${intitule}',organisme='${organisme}',
+    const { id } = req.body.id
+
+    const { intitule, organisme, date, duree, titre } = req.body.data
+
+    //check if there is a user with that matricule
+
+    // update data into table
+    sql2 = `UPDATE formationpro SET intitule='${intitule}',organisme='${organisme}',
 date='${date}',duree='${duree}',titre='${titre}' WHERE for_id='${id}' `
-  con.query(sql2,(err,update)=>{
-     if (err) {
-      console.log(err)
-      return res.status(402).send('Something went wrong !')
+    con.query(sql2, (err, update) => {
+        if (err) {
+            console.log(err)
+            return res.status(402).send('Something went wrong !')
         }
-        res.json({msg:'Successfully updated'})
- })
- 
+        res.json({ msg: 'Successfully updated' })
+    })
+
 
 })
 
-
-
 //------------------------------update__5-------------------------------
-router.post('/edit_5',(req,res)=>{
-    const {id} = req.body.id
-    const {salaire_ini ,salaire_reval ,date,gain ,motif} =  req.body.data
-     console.log(req.body.data)
-      //check if there is a user with that matricule
+router.post('/edit_5', (req, res) => {
 
-// update data into table
-sql2 =`UPDATE RevSalairiale SET salaire_initial='${salaire_ini}',salaire_rev='${salaire_reval}',
+    const { id } = req.body.id
+
+    const { salaire_ini, salaire_reval, date, gain, motif } = req.body.data
+
+    //check if there is a user with that matricule
+
+    // update data into table
+    sql2 = `UPDATE RevSalairiale SET salaire_initial='${salaire_ini}',salaire_rev='${salaire_reval}',
 date='${date}',gain='${gain}',motif='${motif}' WHERE rev_id='${id}' `
-  con.query(sql2,(err,update)=>{
-     if (err) {
-      console.log(err)
-      return res.status(402).send('Something went wrong !')
+    con.query(sql2, (err, update) => {
+        if (err) {
+            console.log(err)
+            return res.status(402).send('Something went wrong !')
         }
-        res.json({msg:'Successfully updated'})
- })
- 
+        res.json({ msg: 'Successfully updated' })
+    })
+
 
 })
 
 //------------------------------update__6--------------------------------
-router.post('/edit_6',(req,res)=>{
-    const {id} = req.body.id
-    const {designation, auteur, date, griefs   } =  req.body.data
-     console.log(req.body.data)
-      //check if there is a user with that matricule
-// update data into table
-sql2 =`UPDATE mesures_disc SET designation='${designation}',auteur='${auteur}',
+router.post('/edit_6', (req, res) => {
+
+    const { id } = req.body.id
+
+    const { designation, auteur, date, griefs } = req.body.data
+
+    //check if there is a user with that matricule
+
+    // update data into table
+    sql2 = `UPDATE mesures_disc SET designation='${designation}',auteur='${auteur}',
 date='${date}',griefs='${griefs}' WHERE mes_id='${id}'`
-  con.query(sql2,(err,update)=>{
-     if (err) {
-      console.log(err)
-      return res.status(402).send('Something went wrong !')
+    con.query(sql2, (err, update) => {
+        if (err) {
+            console.log(err)
+            return res.status(402).send('Something went wrong !')
         }
-        res.json({msg:'Successfully updated'})
- })
- 
+        res.json({ msg: 'Successfully updated' })
+    })
+
 
 
 })
 
-
 //------------------------------update__7--------------------------------
-router.post('/edit_7',(req,res)=>{
-    const {id} = req.body.id
-    const {absence_irr, absence_aut, date, conge  } =  req.body.data
-     console.log(req.body.data)
-     console.log(id)
-      //check if there is a user with that matricule
+router.post('/edit_7', (req, res) => {
 
-// update data into table
-sql2 =`UPDATE assiduite SET  absence_irr='${absence_irr}',absence_aut='${absence_aut}',
+    const { id } = req.body.id
+
+    const { absence_irr, absence_aut, date, conge } = req.body.data
+
+    //check if there is a user with that matricule
+
+    // update data into table
+    sql2 = `UPDATE assiduite SET  absence_irr='${absence_irr}',absence_aut='${absence_aut}',
 annee='${date}',conge='${conge}' WHERE ass_id='${id}'`
-  con.query(sql2,(err,update)=>{
-     if (err) {
-      console.log(err)
-      return res.status(402).send('Something went wrong !')
+    con.query(sql2, (err, update) => {
+        if (err) {
+            console.log(err)
+            return res.status(402).send('Something went wrong !')
         }
-        res.json({msg:'Successfully updated'})
- })
- 
-
+        res.json({ msg: 'Successfully updated' })
+    })
 
 })
 

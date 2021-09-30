@@ -44,7 +44,6 @@ router.post('/documents/user',(req,res)=>{
           console.log(err)
           return res.status(400).send('Something went wrong !')
         } 
-        // console.log(data)
         res.send(data)
       })
 })

@@ -42,7 +42,7 @@ function ManageDocuments() {
     const { roww, coll__1, coll__2, modelAddDocument } = useContext(Context);
 
     // useState
-    const [reclamations, setReclamations] = useState([])
+    const [documents, setDocuments] = useState([])
     const [spinner, setSpinner] = useState(false)
     const [emp_id, setemp_id] = useState('')
     const [matri, setmatri] = useState('')
@@ -79,7 +79,7 @@ function ManageDocuments() {
         },
         {
             title: "Document",
-            field: "description",
+            field: "name",
             cellStyle: { padding: '8px' },
             // headerStyle: { color: '#fff' },
             cellStyle: { padding: '8px', width: '70%' },
@@ -94,14 +94,12 @@ function ManageDocuments() {
         },
     ];
 
-
-
     // useEffect
     useEffect(() => {
         setSpinner(true)
-        axios.get('http://localhost:3001/reclamations').then((response) => {
+        axios.get('http://localhost:3001/documents').then((response) => {
             console.log(response.data)
-            setReclamations(response.data)
+            setDocuments(response.data)
             setSpinner(false)
         }).catch((error) => {
             setSpinner(false)
@@ -129,22 +127,26 @@ function ManageDocuments() {
         modelAddDocument.current.classList.add('active')
     }
 
-    // const handleShowUpdateModel = (e, employe) => {
-    //     overlayUpdate.current.classList.add('active')
-    //     setemp_id(employe.emp_id)
-    // }
-
-    const handleRowClick = (e, row) => {
-        console.log(row.rec_id)
-        const rec_id = row.rec_id
-        axios.post('http://localhost:3001/reclamations/update', { rec_id })
-        history.push(`/reclamations/${rec_id}`)
+    const handleBtnDownloadDocument = (e, row) => {
+        const doc_name = row.name
+        axios({
+            url: `http://localhost:3001/admin/download/${doc_name}`,
+            method: 'POST',
+            responseType: 'blob', // important
+        }).then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', doc_name);
+            document.body.appendChild(link);
+            link.click();
+        });
     }
 
-    const handleBtnDeleteMessage = (e, row) => {
-        console.log(row.rec_id)
-        const rec_id = row.rec_id
-        axios.post(`http://localhost:3001/reclamations/delete`, { rec_id }).then((response) => {
+    const handleBtnDeleteDocument = (e, row) => {
+        console.log(row.doc_id)
+        const doc_id = row.doc_id
+        axios.post(`http://localhost:3001/documents/delete`, { doc_id }).then((response) => {
             console.log(response.data)
             setListen(!listen)
             window.alert(response.data)
@@ -157,11 +159,9 @@ function ManageDocuments() {
         })
     }
 
-
-
     return (
         <>
-            <AddDocumentModel />
+            <AddDocumentModel listen={listen} setListen={setListen} />
             <div className="roww" ref={roww} >
                 <section className="coll-1" ref={coll__1}>
                     <NavAddEmploye current="manageDocuments" />
@@ -169,13 +169,12 @@ function ManageDocuments() {
                 <section className="coll-2 " ref={coll__2}>
                     <HeaderRight />
                     <div className="coll-2-container" >
-                        <div className="matrial-table-container reclamation-table">
+                        <div className="matrial-table-container documents-table">
                             <MaterialTable
                                 title="Gestion des Documents"
                                 columns={columns}
-                                data={reclamations}
+                                data={documents}
                                 icons={tableIcons}
-                                onRowClick={(e, row) => handleRowClick(e, row)}
                                 options={{
                                     pageSizeOptions: [5, 10, 20], pageSize: 10, paginationType: "normal",
                                     headerStyle: { background: '#2CC56C', color: '#fff', fontSize: '16px', padding: '12px 8px' },
@@ -196,13 +195,13 @@ function ManageDocuments() {
                                     {
                                         icon: () => <DownloadIcon style={{ color: '#0FA7EE', }} />,
                                         onClick: (event, row) => {
-                                            // handleBtnDeleteMessage(event, row)
+                                            handleBtnDownloadDocument(event, row)
                                         }
                                     },
                                     {
-                                        icon: () => <DeleteIcon style={{ color: '#DC3545', fontSize: '20px' }} />,
+                                        icon: () => <DeleteIcon style={{ color: '#DC3545', fontSize: '21px' }} />,
                                         onClick: (event, row) => {
-                                            handleBtnDeleteMessage(event, row)
+                                            handleBtnDeleteDocument(event, row)
                                         }
                                     },
 

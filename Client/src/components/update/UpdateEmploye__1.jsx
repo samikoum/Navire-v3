@@ -117,6 +117,7 @@ function UpdateEmploye__1() {
                                 <br />
                                 <input
                                     type="number"
+                                    min="0"
                                     className="inputText"
                                     required
                                     onChange={(e) => setmatricule(e.target.value)}
