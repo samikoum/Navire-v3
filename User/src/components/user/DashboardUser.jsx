@@ -6,6 +6,10 @@ import HeaderRightUser from '../includes/HeaderRightUser';
 import MenuIcon from '@mui/icons-material/Menu';
 import './user.css'
 
+
+
+
+
 function DashboardUser() {
     const { roww, coll__1, coll__2, handleClickMenu, iconMenu } = useContext(Context);
 
@@ -16,6 +20,11 @@ function DashboardUser() {
                 roww.current.style.height = '100vh'
             }
         }
+
+
+        // socket.on('message', (data) => {
+        //     console.log(data)
+        // })
     }, [])
 
 

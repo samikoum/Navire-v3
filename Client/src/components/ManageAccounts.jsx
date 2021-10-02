@@ -93,7 +93,6 @@ function ManageAccounts() {
     useEffect(() => {
         setSpinner(true)
         axios.get('http://localhost:3001/users').then((response) => {
-            console.log(response.data)
             setEmployes(response.data)
             // setAdded_on(response.data[0])
             setSpinner(false)
@@ -115,7 +114,7 @@ function ManageAccounts() {
                 roww.current.style.height = '100vh'
             }
         }
-
+        document.title = "Gestion Comptes"
     }, [])
 
     // handle Models
@@ -153,7 +152,7 @@ function ManageAccounts() {
                 <section className="coll-1" ref={coll__1}>
                     <NavAddEmploye current="manageAccounts" />
                 </section>
-                <section className="coll-2 " ref={coll__2}>
+                <section className="coll-2 notif-employer" ref={coll__2}>
                     <HeaderRight />
                     <div className="coll-2-container" >
                         <div className="matrial-table-container">
@@ -164,7 +163,7 @@ function ManageAccounts() {
                                 icons={tableIcons}
 
                                 options={{
-                                    pageSizeOptions: [10, 20, 30, 40, 50], pageSize: 7, paginationType: "stepped",
+                                    pageSizeOptions: [10, 20, 30, 40, 50], pageSize: 10, paginationType: "stepped",
                                     exportButton: true, exportAllData: true, exportFileName: "Employers",
                                     columnsButton: true,
                                     headerStyle: { background: '#222D32', color: '#fff', fontSize: '16px', padding: '12px 8px', },

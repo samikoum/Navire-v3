@@ -94,7 +94,6 @@ function DocumentUser() {
         setSpinner(true)
         axios.post('http://localhost:3001/documents/user', { emp_id, matricule },
             { headers: { "Authorization": `${JSON.parse(localStorage.getItem('user')).token}` } }).then((response) => {
-                console.log(response.data)
                 setDocuments(response.data)
                 setSpinner(false)
             }).catch((error) => {

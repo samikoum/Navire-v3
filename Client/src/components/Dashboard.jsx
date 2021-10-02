@@ -35,6 +35,7 @@ function Dashboard() {
                 roww.current.style.height = '100vh'
             }
         }
+        document.title = "Dashboard"
     }, [])
 
     const data = [

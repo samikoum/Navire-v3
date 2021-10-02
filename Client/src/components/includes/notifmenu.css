@@ -1,0 +1,69 @@
+.coll-2-header .notif-menu {
+    border: 2px solid#F3F3F3;
+    position: absolute;
+    top: 55px;
+    right: 16px;
+    z-index: 300;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #dddddd;
+    height: 350px;
+    width: 300px;
+    background: #fff;
+    padding: 10px 0;
+    overflow: auto;
+  }
+
+
+  .coll-2-header .notification-sender {
+    display: flex;
+    align-items: center;
+    padding: 8px 8px ;
+    margin-bottom: 10px;
+    /* border: 1px solid red; */
+    cursor: pointer;
+}
+.coll-2-header .notification-sender:hover {
+  background: #F1F1F1;
+}
+
+.notification-sender .i-mui-notif {
+    color: #333;
+    font-size: 38px;
+    margin-right: 5px;
+}
+.notification-sender h4 {
+    font-size: 16px;
+    color: #333;
+}
+.notification-sender-vu .i-mui-notif {
+  color: #898A8D;
+}
+.notification-sender-vu h4 {
+  color: #898A8D;
+}
+
+
+
+  /* width */
+  .notif-menu::-webkit-scrollbar {
+    width: 10px ;
+  }
+  
+  /* Track */
+  .notif-menu::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  .notif-menu::-webkit-scrollbar-thumb {
+    background: #888; 
+    background: #DCDEE1;
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  .notif-menu::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+    background: #c2c5ca; 
+  }

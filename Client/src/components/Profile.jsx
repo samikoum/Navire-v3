@@ -17,6 +17,7 @@ function Profile() {
                 roww.current.style.height = '100vh'
             }
         }
+        document.title = "Profile"
     }, [])
     return (
         <>

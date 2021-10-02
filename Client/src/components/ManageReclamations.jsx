@@ -38,6 +38,7 @@ function ManageReclamations() {
     // useContext
     const { roww, coll__1, coll__2, handleClickMenu, iconMenu,
         btnShowModel, overlayAdd, overlayUpdate, overlay } = useContext(Context);
+    const { isCall, setIsCall } = useContext(Context)
 
     // useState
     const [reclamations, setReclamations] = useState([])
@@ -96,7 +97,6 @@ function ManageReclamations() {
     useEffect(() => {
         setSpinner(true)
         axios.get('http://localhost:3001/reclamations').then((response) => {
-            console.log(response.data)
             setReclamations(response.data)
             setSpinner(false)
         }).catch((error) => {
@@ -107,7 +107,7 @@ function ManageReclamations() {
                 window.alert('Network error try again !')
             }
         })
-    }, [listen])
+    }, [listen, isCall])
 
     useEffect(() => {
         console.log(roww.current.offsetHeight)
@@ -117,7 +117,7 @@ function ManageReclamations() {
                 roww.current.style.height = '100vh'
             }
         }
-
+        document.title = "Gestion Reclamations"
     }, [])
 
     // handle Models
@@ -161,7 +161,7 @@ function ManageReclamations() {
                 <section className="coll-1" ref={coll__1}>
                     <NavAddEmploye current="manageReclamations" />
                 </section>
-                <section className="coll-2 " ref={coll__2}>
+                <section className="coll-2 notif-employer" ref={coll__2}>
                     <HeaderRight />
                     <div className="coll-2-container" >
                         <div className="matrial-table-container reclamation-table">

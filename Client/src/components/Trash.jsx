@@ -40,6 +40,7 @@ function Trash() {
                 roww.current.style.height = '100vh'
             }
         }
+        document.title = "Corbeille"
     }, [])
 
     // handle functions

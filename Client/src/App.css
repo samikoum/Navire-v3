@@ -125,6 +125,7 @@ footer p {
     /* background: #EDF5F9; */
     background: #FBFBFB;
     /* background: #F4F4F4; */
+    /* background: #F0F0F0; */
     overflow-x: hidden;
   }
 
@@ -188,6 +189,7 @@ footer p {
 }
 
 /*---------------------Coll-2---------------------*/
+/*-----coll-2-header------*/
 .coll-2-header {
   position: relative;
   display: flex;
@@ -196,6 +198,8 @@ footer p {
   padding: 11px 16px;
   background: #fff;
   box-shadow: 5px 5px 10px 0  #dddddd;
+  /* background: #3A9CFE;
+  color: #fff; */
 }
 .coll-2-container {
   padding: 30px 16px;
@@ -226,6 +230,8 @@ footer p {
 }
 .coll-2-header-right .i-notif {
   margin-right: 12px;
+  margin-right: 15px;
+  cursor: pointer;
 }
 .coll-2-header-right img {
   margin-right: 5px;
@@ -237,6 +243,7 @@ footer p {
   font-size: 14px;
 } 
 
+/*-----coll-2-container------*/
 .coll-2-container form {
   /* border: 1px solid red; */
   width: 60%;

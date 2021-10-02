@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 require('dotenv').config()
 
 
+
 // get Accounts employers 
 router.get('/users', (req, res) => {
 
@@ -31,10 +32,22 @@ router.get('/users/:id', (req, res) => {
     })
 })
 
+// get Notifications 
+router.get('/reclamations/notifications/count',(req,res)=>{
+    // sql = "SELECT matricule from users u, reclamation r WHERE  r.status='' AND u.emp_id=r.sender ORDER BY r.rec_id DESC; "
+    sql = "SELECT matricule, status from users u, reclamation r WHERE u.emp_id=r.sender ORDER BY r.rec_id DESC LIMIT 10; "
+    sql2 ="SELECT COUNT(*) as count from reclamation WHERE status='' "
+    con.query(sql+sql2, (err, rows) => {
+        // console.log(rows[0])  
+        res.send(rows)
+    })
+})
+
+
 // --------------------------------Documents---------------------------
 // get Documents
 router.get('/documents', (req, res) => {
-
+   
     sql = "SELECT * from users u RIGHT JOIN  documents d  ON u.emp_id=d.reciver  ORDER BY d.doc_id DESC"
     con.query(sql, (err, data) => {
         if (err) {

@@ -11,6 +11,11 @@ import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
 import './user.css'
 
+
+import { io } from 'socket.io-client'
+
+const socket = io(`http://localhost:3001`)
+
 function ReclamationUser() {
     const { roww, coll__1, coll__2, handleClickMenu, iconMenu, setIsAuth } = useContext(Context);
     const { loader, setLoader } = useContext(Context)
@@ -24,16 +29,20 @@ function ReclamationUser() {
                 roww.current.style.height = '100vh'
             }
         }
+
     }, [])
 
     // Form Submit 
     const submitForm = (data) => {
+
         const emp_id = JSON.parse(localStorage.getItem('user')).user_id
         const matricule = JSON.parse(localStorage.getItem('user')).matricule
+
         setLoader(true)
         axios.post(`${process.env.REACT_APP_API}/reclamation`, { data, emp_id, matricule },
             { headers: { "Authorization": `${JSON.parse(localStorage.getItem('user')).token}` } })
             .then((response) => {
+                socket.emit('message', 'newIo')
                 setLoader(false)
                 window.alert(response.data)
                 reset()
@@ -48,7 +57,7 @@ function ReclamationUser() {
                     window.alert('Network error try again !')
                 }
             })
-        // reset()
+
     }
 
 

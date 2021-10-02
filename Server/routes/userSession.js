@@ -32,7 +32,7 @@ router.post('/profile/edit',async (req,res)=>{
 
 // --------------------------------Documents-------------------------
 router.post('/documents/user',(req,res)=>{
-
+   
     const { emp_id, matricule } = req.body
  
     if( (emp_id !== req.user.id) || (matricule !== req.user.matricule) ) return res.status(403).send('Access Denied')

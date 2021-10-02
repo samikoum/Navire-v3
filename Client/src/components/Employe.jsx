@@ -119,7 +119,7 @@ function Employe() {
                 roww.current.style.height = '100vh'
             }
         }
-
+        document.title = "Employers"
     }, [])
 
     // handle functions
@@ -138,7 +138,7 @@ function Employe() {
                 <section className="coll-1" ref={coll__1}>
                     <NavAddEmploye current="Employe" />
                 </section>
-                <section className="coll-2 " ref={coll__2}>
+                <section className="coll-2 notif-employer" ref={coll__2}>
                     <HeaderRight />
                     <div className="coll-2-container" >
                         <div className="matrial-table-container">
@@ -149,7 +149,7 @@ function Employe() {
                                 icons={tableIcons}
 
                                 options={{
-                                    pageSizeOptions: [10, 20, 30, 40, 50], pageSize: 7, paginationType: "stepped",
+                                    pageSizeOptions: [10, 20, 30, 40, 50], pageSize: 10, paginationType: "stepped",
                                     // exportButton: true, exportAllData: true, exportFileName: "Employers",
                                     columnsButton: true,
                                     sorting: false,

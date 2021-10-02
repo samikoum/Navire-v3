@@ -21,7 +21,7 @@ function ViewMessage() {
 
     useEffect(() => {
         axios.get(`http://localhost:3001/reclamations/${id}`).then((response) => {
-            console.log(response.data[0])
+            // console.log(response.data[0])
             setMessage(response.data[0])
             setAdded_on(response.data[0]['added_on'])
         }).catch((error) => {

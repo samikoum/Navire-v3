@@ -67,6 +67,10 @@ function App() {
   console.log(isAuth)
   console.log(isX)
 
+  const [isCall, setIsCall] = useState(false)
+  const [NotificationIconClick, setNotificationIconClick] = useState(false)
+  const notifIcon = useRef(null)
+
   // useRef
   const roww = useRef(null)
   const coll__1 = useRef(null)
@@ -122,6 +126,12 @@ function App() {
     console.log('Close Menu')
   }
 
+  window.addEventListener('click', (e) => {
+    var isClickInsideElement = notifIcon.current.contains(e.target);
+    if (!isClickInsideElement) {
+      setNotificationIconClick(false)
+    }
+  })
 
 
   return (
@@ -133,10 +143,10 @@ function App() {
           step__1, step__2, step__3, step__4, step__5, step__6, step__7, step__8,
           loader, setLoader, btnNext, modelAddDocument,
           btnShowModel, overlay, overlayAdd, overlayUpdate, btnClose, btnCancel,
+          NotificationIconClick, setNotificationIconClick, notifIcon, isCall, setIsCall
         }}>
         <Router>
           <Switch>
-
             <ProtectedLogin
               exact
               path="/login"

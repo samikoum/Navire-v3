@@ -98,7 +98,6 @@ function ManageDocuments() {
     useEffect(() => {
         setSpinner(true)
         axios.get('http://localhost:3001/documents').then((response) => {
-            console.log(response.data)
             setDocuments(response.data)
             setSpinner(false)
         }).catch((error) => {
@@ -119,7 +118,7 @@ function ManageDocuments() {
                 roww.current.style.height = '100vh'
             }
         }
-
+        document.title = "Gestion Documents"
     }, [])
 
     // handle Models
@@ -144,10 +143,8 @@ function ManageDocuments() {
     }
 
     const handleBtnDeleteDocument = (e, row) => {
-        console.log(row.doc_id)
         const doc_id = row.doc_id
         axios.post(`http://localhost:3001/documents/delete`, { doc_id }).then((response) => {
-            console.log(response.data)
             setListen(!listen)
             window.alert(response.data)
         }).catch((error) => {
@@ -166,7 +163,7 @@ function ManageDocuments() {
                 <section className="coll-1" ref={coll__1}>
                     <NavAddEmploye current="manageDocuments" />
                 </section>
-                <section className="coll-2 " ref={coll__2}>
+                <section className="coll-2 notif-employer" ref={coll__2}>
                     <HeaderRight />
                     <div className="coll-2-container" >
                         <div className="matrial-table-container documents-table">

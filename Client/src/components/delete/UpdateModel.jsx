@@ -14,7 +14,7 @@ function UpdateModel({ emp_id, listen, setListen }) {
 
     // useState
     const [matricule, setmatricule] = useState('')
-    console.log(matricule)
+    // console.log(matricule)
     // useRef
     const modelUpdate = useRef(null)
 
@@ -59,7 +59,7 @@ function UpdateModel({ emp_id, listen, setListen }) {
 
     useEffect(() => {
         axios.get(`http://localhost:3001/users/${emp_id}`).then((response) => {
-            console.log(response.data[0].matricule)
+            // console.log(response.data[0].matricule)
             setmatricule(response.data[0].matricule)
         }).catch((error) => {
             console.log(error)
