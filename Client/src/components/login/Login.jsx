@@ -29,7 +29,7 @@ function Login() {
     // Form Submit 
     const submitForm = (data) => {
         setLoader(true)
-        axios.post(`http://localhost:3001/login`, data).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/login`, data).then((response) => {
             localStorage.setItem('admin', JSON.stringify(response.data.admin))
             localStorage.setItem('isAuth', response.data.auth)
             setIsAuth(localStorage.getItem('isAuth'))

@@ -19,7 +19,7 @@ function Trash() {
     // useEffect
     useEffect(() => {
         setSpinner(true)
-        axios.get('http://localhost:3001/employes/trash').then((response) => {
+        axios.get(`${process.env.REACT_APP_API}/employes/trash`).then((response) => {
             // console.log(response.data)
             setEmployes(response.data)
             setSpinner(false)
@@ -50,7 +50,7 @@ function Trash() {
     }
     const handleBtnRestore = (e) => {
         const id = e.target.id
-        axios.post(`http://localhost:3001/restore`, { id }).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/restore`, { id }).then((response) => {
             console.log(response.data)
             setListen(!listen)
             window.alert(response.data.msg)

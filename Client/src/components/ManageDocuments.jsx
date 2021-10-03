@@ -97,7 +97,7 @@ function ManageDocuments() {
     // useEffect
     useEffect(() => {
         setSpinner(true)
-        axios.get('http://localhost:3001/documents').then((response) => {
+        axios.get(`${process.env.REACT_APP_API}/documents`).then((response) => {
             setDocuments(response.data)
             setSpinner(false)
         }).catch((error) => {
@@ -129,7 +129,7 @@ function ManageDocuments() {
     const handleBtnDownloadDocument = (e, row) => {
         const doc_name = row.name
         axios({
-            url: `http://localhost:3001/admin/download/${doc_name}`,
+            url: `${process.env.REACT_APP_API}/admin/download/${doc_name}`,
             method: 'POST',
             responseType: 'blob', // important
         }).then((response) => {
@@ -144,7 +144,7 @@ function ManageDocuments() {
 
     const handleBtnDeleteDocument = (e, row) => {
         const doc_id = row.doc_id
-        axios.post(`http://localhost:3001/documents/delete`, { doc_id }).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/documents/delete`, { doc_id }).then((response) => {
             setListen(!listen)
             window.alert(response.data)
         }).catch((error) => {

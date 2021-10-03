@@ -8,7 +8,7 @@ require('dotenv').config()
 // get Accounts employers 
 router.get('/users', (req, res) => {
 
-    sql = "SELECT * from users "
+    sql = "SELECT * from users ORDER BY emp_id DESC "
     con.query(sql, (err, data) => {
         if (err) {
             console.log(err)

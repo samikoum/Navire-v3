@@ -36,7 +36,7 @@ function UpdateEmploye() {
 
     // useEffect
     useEffect(() => {
-        axios.get(`http://localhost:3001/employe/${id}`).then((response) => {
+        axios.get(`${process.env.REACT_APP_API}/employe/${id}`).then((response) => {
             // console.log(response.data)
             setTable1(response.data.table1)
             setTable2(response.data.table2)

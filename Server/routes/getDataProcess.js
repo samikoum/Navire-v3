@@ -7,7 +7,7 @@ require('dotenv').config()
 // get employers with status='on'
 router.get('/employes', (req, res) => {
 
-    sql = "SELECT * from rgeneraux where status='on' "
+    sql = "SELECT * from rgeneraux where status='on' ORDER BY rg_id DESC "
     con.query(sql, (err, data) => {
         if (err) {
             console.log(err)
@@ -20,7 +20,7 @@ router.get('/employes', (req, res) => {
 // get employers with status='off'
 router.get('/employes/trash', (req, res) => {
 
-    sql = "SELECT * from rgeneraux where status='off' "
+    sql = "SELECT * from rgeneraux where status='off' ORDER BY rg_id DESC"
     con.query(sql, (err, data) => {
         if (err) {
             console.log(err)

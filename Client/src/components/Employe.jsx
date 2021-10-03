@@ -30,6 +30,11 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DownloadIcon from '@mui/icons-material/Download';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+
+import { CSVLink } from "react-csv";
+import { jsPDF } from "jspdf";
+
 
 
 function Employe() {
@@ -38,7 +43,7 @@ function Employe() {
     const [spinner, setSpinner] = useState(false)
     const [emp_id, setemp_id] = useState('')
     const [listen, setListen] = useState(false)
-
+    const [csvTable, setCsvTable] = useState([])
     let history = useHistory()
 
     // Matriel-table
@@ -98,7 +103,7 @@ function Employe() {
     // useEffect
     useEffect(() => {
         setSpinner(true)
-        axios.get('http://localhost:3001/employes').then((response) => {
+        axios.get(`${process.env.REACT_APP_API}/employes`).then((response) => {
             // console.log(response.data)
             setEmployes(response.data)
             setSpinner(false)
@@ -122,14 +127,40 @@ function Employe() {
         document.title = "Employers"
     }, [])
 
+    // Date
+    // const todayNaissance = todayFunction(dateNaissance)
+
     // handle functions
-    const handleBtnExport = () => {
-        console.log('Export btn')
+    const handleBtnExportPdf = () => {
+
+        const headers = [["Matricule", "Nom", "Prénom", "Date Naissance", "Address", "Region"]];
+        const data = employes.map(elt =>
+            [elt.matricule, elt.nom, elt.prenom, elt.date_naissance, elt.address, elt.region]);
+
+        let content = {
+            startY: 25,
+            head: headers,
+            body: data,
+        };
+        const doc = new jsPDF();
+        var height = doc.internal.pageSize.height;
+        doc.text("Employers", 15, 20);
+        doc.autoTable(content);
+        doc.save("a4.pdf");
     }
     const handleShowModel = (e, employe) => {
         overlay.current.classList.add('active')
         setemp_id(employe.rg_id)
     }
+    // Csv + Pdf
+    const headers = [
+        { label: "Matricule", key: "matricule" },
+        { label: "Nom", key: "nom" },
+        { label: "Prénom", key: "prenom" },
+        { label: "Date Naissance", key: "date_naissance" },
+        { label: "Address", key: "address" },
+        { label: "Region", key: "region" },
+    ];
 
     return (
         <>
@@ -161,10 +192,18 @@ function Employe() {
 
                                 actions={[
                                     {
-                                        icon: () => <DownloadIcon style={{ color: '#757575' }} />,
+                                        icon: () => <CSVLink className="csv-ling" filename={"employers.csv"} data={employes} headers={headers}>
+                                            <DownloadIcon style={{ color: '#757575' }} /></CSVLink>,
                                         isFreeAction: true,
                                         onClick: () => {
-                                            handleBtnExport()
+                                            // handleBtnExport()
+                                        }
+                                    },
+                                    {
+                                        icon: () => <PictureAsPdfIcon style={{ color: '#757575' }} />,
+                                        isFreeAction: true,
+                                        onClick: () => {
+                                            handleBtnExportPdf()
                                         }
                                     },
                                     {

@@ -30,6 +30,7 @@ function AddEmploye__7() {
                 roww.current.style.height = '100vh'
             }
         }
+        document.title = "add__7"
     }, [])
     useEffect(() => {
         step__1.current.classList.add('completed', 'active')
@@ -44,6 +45,7 @@ function AddEmploye__7() {
             btnNext.current.classList = "btn btn-primary btn-add"
         }
     }, [isX])
+
 
     const handleBtnNext = () => {
         if (isX > 7) {
@@ -71,7 +73,7 @@ function AddEmploye__7() {
         console.log(data)
         const matricule = localStorage.getItem('mat')
         setLoader(true)
-        axios.post(`http://localhost:3001/add_7`, { data, matricule }).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/add_7`, { data, matricule }).then((response) => {
             // console.log(response.data)
             localStorage.setItem('isX', response.data.x)
             setIsX(localStorage.getItem('isX'))
@@ -90,7 +92,7 @@ function AddEmploye__7() {
 
     useEffect(() => {
         if (localStorage.getItem('mat') !== null) {
-            axios.get(`http://localhost:3001/employe/${localStorage.getItem('mat')}`).then((response) => {
+            axios.get(`${process.env.REACT_APP_API}/employe/${localStorage.getItem('mat')}`).then((response) => {
                 console.log(response.data.table7)
                 const tab = response.data.table7[0]
                 // console.log(res.data.table1)

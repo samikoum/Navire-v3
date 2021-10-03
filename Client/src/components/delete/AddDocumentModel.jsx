@@ -40,7 +40,7 @@ function AddDocumentModel({ listen, setListen }) {
         formData.append("subject", data.subject);
         formData.append("description", data.description);
         setLoader(true)
-        axios.post(`http://localhost:3001/documents/upload`, formData).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/documents/upload`, formData).then((response) => {
             console.log(response.data)
             inputFile.current.value = ""
             reset()

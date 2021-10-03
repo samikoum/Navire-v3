@@ -30,6 +30,9 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import DownloadIcon from '@mui/icons-material/Download';
+
+import { CSVLink, CSVDownload } from "react-csv";
 
 
 
@@ -92,7 +95,7 @@ function ManageAccounts() {
     // useEffect
     useEffect(() => {
         setSpinner(true)
-        axios.get('http://localhost:3001/users').then((response) => {
+        axios.get(`${process.env.REACT_APP_API}/users`).then((response) => {
             setEmployes(response.data)
             // setAdded_on(response.data[0])
             setSpinner(false)
@@ -131,6 +134,13 @@ function ManageAccounts() {
         overlay.current.classList.add('active')
         setemp_id(employe.emp_id)
     }
+    const headers = [
+        { label: "ID", key: "emp_id" },
+        { label: "Matricule", key: "matricule" },
+        { label: "Nom", key: "nom" },
+        { label: "Prénom", key: "prenom" },
+    ];
+
 
     return (
         <>
@@ -164,7 +174,7 @@ function ManageAccounts() {
 
                                 options={{
                                     pageSizeOptions: [10, 20, 30, 40, 50], pageSize: 10, paginationType: "stepped",
-                                    exportButton: true, exportAllData: true, exportFileName: "Employers",
+                                    // exportButton: true, exportAllData: true, exportFileName: "Employers",
                                     columnsButton: true,
                                     headerStyle: { background: '#222D32', color: '#fff', fontSize: '16px', padding: '12px 8px', },
                                     rowStyle: (data, index) => index % 2 == 1 ? { background: '#dddddd', fontSize: '15px', } : { fontSize: '15px' },
@@ -173,6 +183,14 @@ function ManageAccounts() {
                                 }}
 
                                 actions={[
+                                    // {
+                                    //     icon: () => <CSVLink className="csv-ling" filename={"employers.csv"} data={employes} headers={headers}>
+                                    //         <DownloadIcon style={{ color: '#757575' }} /></CSVLink>,
+                                    //     isFreeAction: true,
+                                    //     onClick: () => {
+                                    //         // handleBtnExport()
+                                    //     }
+                                    // },
                                     {
                                         icon: () => <AddCircleIcon style={{ fontSize: '40px', color: '#4BB543' }} />,
                                         isFreeAction: true,

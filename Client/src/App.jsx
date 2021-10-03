@@ -126,13 +126,6 @@ function App() {
     console.log('Close Menu')
   }
 
-  window.addEventListener('click', (e) => {
-    var isClickInsideElement = notifIcon.current.contains(e.target);
-    if (!isClickInsideElement) {
-      setNotificationIconClick(false)
-    }
-  })
-
 
   return (
     <>
@@ -149,7 +142,7 @@ function App() {
           <Switch>
             <ProtectedLogin
               exact
-              path="/login"
+              path="/"
               component={Login}
               isAuth={isAuth}
               setIsAuth={setIsAuth}

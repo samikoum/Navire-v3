@@ -9,10 +9,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import { io } from 'socket.io-client'
 
-const socket = io(`http://localhost:3001`)
+const socket = io(`${process.env.REACT_APP_API}`)
 
 
 function HeaderRight() {
+
     const { handleClickMenu, iconMenu } = useContext(Context);
     const [MatriculeNotifcation, setMatriculeNotifcation] = useState([])
     const { NotificationIconClick, setNotificationIconClick, notifIcon } = useContext(Context)
@@ -31,6 +32,15 @@ function HeaderRight() {
             setCountNotification(data[1][0].count)
         })
     }, [isCall])
+
+    window.addEventListener('click', (e) => {
+        if (notifIcon.current !== null) {
+            var isClickInsideElement = notifIcon.current.contains(e.target);
+            if (!isClickInsideElement) {
+                setNotificationIconClick(false)
+            }
+        }
+    })
 
     return (
         <>

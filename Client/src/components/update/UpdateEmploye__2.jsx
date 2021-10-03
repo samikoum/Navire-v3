@@ -26,7 +26,7 @@ function UpdateEmploye__2() {
 
     // useEffect
     useEffect(() => {
-        axios.get(`http://localhost:3001/employeUp/${id}`).then((response) => {
+        axios.get(`${process.env.REACT_APP_API}/employeUp/${id}`).then((response) => {
             console.log(response.data.table2)
             const tab = response.data.table2[0]
             setpost(tab['post_oc'])
@@ -67,7 +67,7 @@ function UpdateEmploye__2() {
             post, employer, debut, fin
         }
         setLoader(true)
-        axios.post(`http://localhost:3001/edit_2`, { data, id: { id } }).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/edit_2`, { data, id: { id } }).then((response) => {
             console.log(response.data)
             setLoader(false)
             window.alert(response.data.msg)

@@ -42,7 +42,7 @@ router.post('/edit_1', (req, res) => {
         con.query(sql2 + sql22 + sql3 + sql4 + sql5 + sql6 + sql7, (err, update) => {
             if (err) {
                 console.log(err)
-                return res.status(402).send('Something went wrong !')
+                return res.status(402).send('Something went wrong  !')
             }
             res.json({ msg: 'Successfully updated' })
 

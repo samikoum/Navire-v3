@@ -31,6 +31,7 @@ function AddEmploye__2() {
                 roww.current.style.height = '100vh'
             }
         }
+        document.title = "add__2"
     }, [])
     useEffect(() => {
         step__1.current.classList.add('completed', 'active')
@@ -66,7 +67,7 @@ function AddEmploye__2() {
         console.log(data)
         const matricule = localStorage.getItem('mat')
         setLoader(true)
-        axios.post(`http://localhost:3001/add_2`, { data, matricule }).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/add_2`, { data, matricule }).then((response) => {
             console.log(response.data)
             localStorage.setItem('isX', response.data.x)
             setIsX(localStorage.getItem('isX'))

@@ -30,6 +30,7 @@ function AddEmploye__6() {
                 roww.current.style.height = '100vh'
             }
         }
+        document.title = "add__6"
     }, [])
     useEffect(() => {
         step__1.current.classList.add('completed', 'active')
@@ -42,7 +43,7 @@ function AddEmploye__6() {
             btnNext.current.classList = "btn btn-primary btn-add"
         }
     }, [isX])
-
+ 
     const handleBtnNext = () => {
         if (isX > 6) {
             console.log('btn clicked')
@@ -69,7 +70,7 @@ function AddEmploye__6() {
         console.log(data)
         const matricule = localStorage.getItem('mat')
         setLoader(true)
-        axios.post(`http://localhost:3001/add_6`, { data, matricule }).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/add_6`, { data, matricule }).then((response) => {
             // console.log(response.data)
             localStorage.setItem('isX', response.data.x)
             setIsX(localStorage.getItem('isX'))

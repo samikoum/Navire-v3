@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const PORT = 3001
 const cors = require('cors')
 const bodyParser = require('body-parser')
 var session = require('express-session')
@@ -32,7 +33,9 @@ app.use('/', require('./routes/updateProcess'))
 app.use('/', require('./routes/deleteProcess'))
 app.use('/', require('./routes/userProcess'))
 app.use('/', require('./routes/fileUpload'))
+app.use('/', require('./routes/generateProcess'))
 app.use('/', verifyToken, require('./routes/userSession'))
+
 
 //------------------Socket io-------------------------
 const http = require('http')
@@ -60,12 +63,5 @@ io.on('connection', socket => {
     })
 })
 
-
-
-//-----------------Socket io end------------------------ 
-
-
-
-
-httpServer.listen(3001, () =>
-    console.log('Server running On http://localhost' + 3001))
+httpServer.listen(PORT, () =>
+    console.log('Server running On http://localhost' + PORT))

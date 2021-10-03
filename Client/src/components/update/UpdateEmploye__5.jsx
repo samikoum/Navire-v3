@@ -27,7 +27,7 @@ function UpdateEmploye__5() {
 
     // useEffect
     useEffect(() => {
-        axios.get(`http://localhost:3001/employeUp/${id}`).then((response) => {
+        axios.get(`${process.env.REACT_APP_API}/employeUp/${id}`).then((response) => {
             console.log(response.data.table5)
             const tab = response.data.table5[0]
             setsalaire_ini(tab['salaire_initial'])
@@ -67,7 +67,7 @@ function UpdateEmploye__5() {
             salaire_ini, salaire_reval, date, gain, motif
         }
         setLoader(true)
-        axios.post(`http://localhost:3001/edit_5`, { data, id: { id } }).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/edit_5`, { data, id: { id } }).then((response) => {
             console.log(response.data)
             setLoader(false)
             window.alert(response.data.msg)

@@ -28,6 +28,9 @@ function AddEmploye__1() {
             btnNext.current.classList = "btn btn-primary btn-add"
         }
     }, [isX])
+    useEffect(() => {
+        document.title = "add__1"
+    }, [])
 
     const handleBtnNext = () => {
         if (isX > 1) {
@@ -56,7 +59,7 @@ function AddEmploye__1() {
     const submitForm = (data) => {
         localStorage.setItem('mat', data.matricule)
         setLoader(true)
-        axios.post(`http://localhost:3001/add_1`, data).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/add_1`, data).then((response) => {
             localStorage.setItem('isX', response.data.x)
             setIsX(localStorage.getItem('isX'))
             setLoader(false)

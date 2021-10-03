@@ -96,7 +96,7 @@ function ManageReclamations() {
     // useEffect
     useEffect(() => {
         setSpinner(true)
-        axios.get('http://localhost:3001/reclamations').then((response) => {
+        axios.get(`${process.env.REACT_APP_API}/reclamations`).then((response) => {
             setReclamations(response.data)
             setSpinner(false)
         }).catch((error) => {
@@ -133,14 +133,14 @@ function ManageReclamations() {
     const handleRowClick = (e, row) => {
         console.log(row.rec_id)
         const rec_id = row.rec_id
-        axios.post('http://localhost:3001/reclamations/update', { rec_id })
+        axios.post(`${process.env.REACT_APP_API}/reclamations/update`, { rec_id })
         history.push(`/reclamations/${rec_id}`)
     }
 
     const handleBtnDeleteMessage = (e, row) => {
         console.log(row.rec_id)
         const rec_id = row.rec_id
-        axios.post(`http://localhost:3001/reclamations/delete`, { rec_id }).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/reclamations/delete`, { rec_id }).then((response) => {
             console.log(response.data)
             setListen(!listen)
             window.alert(response.data)

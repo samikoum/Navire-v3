@@ -20,7 +20,7 @@ function ViewMessage() {
     const { id } = useParams()
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/reclamations/${id}`).then((response) => {
+        axios.get(`${process.env.REACT_APP_API}/reclamations/${id}`).then((response) => {
             // console.log(response.data[0])
             setMessage(response.data[0])
             setAdded_on(response.data[0]['added_on'])

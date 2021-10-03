@@ -477,6 +477,12 @@ tr:nth-child(2n) {
   background-color: #dddddd !important;
     color: unset !important;
 }
+.MuiIconButton-label  a {
+  /* padding: 0 1px !important;
+  text-decoration: none !important;
+  color: inherit !important; */
+  display: flex;
+}
 
  /* th:first-of-type {
   border-radius: 5px 0 0 0;

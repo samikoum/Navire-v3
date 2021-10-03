@@ -27,7 +27,7 @@ function UpdateEmploye__4() {
 
     // useEffect
     useEffect(() => {
-        axios.get(`http://localhost:3001/employeUp/${id}`).then((response) => {
+        axios.get(`${process.env.REACT_APP_API}/employeUp/${id}`).then((response) => {
             console.log(response.data.table4)
             const tab = response.data.table4[0]
             setintitule(tab['intitule'])
@@ -66,7 +66,7 @@ function UpdateEmploye__4() {
             intitule, organisme, date, duree, titre
         }
         setLoader(true)
-        axios.post(`http://localhost:3001/edit_4`, { data, id: { id } }).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/edit_4`, { data, id: { id } }).then((response) => {
             console.log(response.data)
             setLoader(false)
             window.alert(response.data.msg)

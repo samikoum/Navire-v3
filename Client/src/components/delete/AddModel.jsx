@@ -5,6 +5,9 @@ import { Link, useHistory, Redirect } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+
+import CloseIcon from '@mui/icons-material/Close';
+
 import './model.css'
 
 
@@ -44,7 +47,7 @@ function AddModel({ listen, setListen }) {
     // Form Submit 
     const submitForm = (data) => {
         overlayAdd.current.classList.remove('active')
-        axios.post(`http://localhost:3001/insert`, data).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/insert`, data).then((response) => {
             setListen(!listen)
             window.alert(response.data)
             reset()
@@ -66,7 +69,7 @@ function AddModel({ listen, setListen }) {
 
                     <div className="model-add-header">
                         <h2>Add Employer ?</h2>
-                        <i className="fas fa-times" ref={btnClose} onClick={handleCloseModel}></i>
+                        <CloseIcon sx={{ color: '#A3A4B0', cursor: 'pointer' }} ref={btnClose} onClick={handleCloseModel} />
                     </div>
                     <form onSubmit={handleSubmit(submitForm)}>
                         <div className="model-add-content">

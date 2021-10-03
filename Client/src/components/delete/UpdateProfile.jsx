@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import CloseIcon from '@mui/icons-material/Close';
 import './model.css'
 
 function UpdateProfile({ admin_id }) {
@@ -53,7 +54,7 @@ function UpdateProfile({ admin_id }) {
     // Form Submit 
     const submitForm = () => {
         overlayUpdate.current.classList.remove('active')
-        axios.post(`http://localhost:3001/adminProfile/edit`, { nom, prenom, email, admin_id }).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/adminProfile/edit`, { nom, prenom, email, admin_id }).then((response) => {
             window.alert(response.data)
             reset()
         }).catch((error) => {
@@ -72,7 +73,7 @@ function UpdateProfile({ admin_id }) {
 
                     <div className="model-add-header">
                         <h2>Edit Profile </h2>
-                        <i className="fas fa-times" ref={btnClose} onClick={handleCloseModel}></i>
+                        <CloseIcon sx={{ color: '#A3A4B0', cursor: 'pointer' }} ref={btnClose} onClick={handleCloseModel} />
                     </div>
                     <form onSubmit={handleSubmit(submitForm)}>
                         <div className="model-add-content">

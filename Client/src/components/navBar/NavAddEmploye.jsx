@@ -23,7 +23,7 @@ function NavAddEmploye({ current }) {
         localStorage.removeItem('admin')
         localStorage.removeItem('isAuth')
         setIsAuth(localStorage.getItem('isAuth'))
-        history.push('/login')
+        history.push('/')
     }
     return (
         <>

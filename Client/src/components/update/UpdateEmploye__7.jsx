@@ -26,7 +26,7 @@ function UpdateEmploye__7() {
 
     // useEffect
     useEffect(() => {
-        axios.get(`http://localhost:3001/employeUp/${id}`).then((response) => {
+        axios.get(`${process.env.REACT_APP_API}/employeUp/${id}`).then((response) => {
             console.log(response.data.table7)
             const tab = response.data.table7[0]
             setabsence_irr(tab['absence_irr'])
@@ -64,7 +64,7 @@ function UpdateEmploye__7() {
             absence_irr, absence_aut, date, conge
         }
         setLoader(true)
-        axios.post(`http://localhost:3001/edit_7`, { data, id: { id } }).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/edit_7`, { data, id: { id } }).then((response) => {
             console.log(response.data)
             setLoader(false)
             window.alert(response.data.msg)

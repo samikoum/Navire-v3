@@ -7,6 +7,9 @@ import todayFunction from '../function/Today'
 import HeaderRight from '../includes/HeaderRight'
 import NotFoundPage from '../includes/NotFound'
 
+import { CSVLink } from "react-csv";
+import { jsPDF } from "jspdf";
+
 function ViewEmploye() {
     const { roww, coll__1, coll__2, handleClickMenu, iconMenu } = useContext(Context);
     const [notFound, setNotFound] = useState(false)
@@ -35,7 +38,7 @@ function ViewEmploye() {
 
     // useEffect
     useEffect(() => {
-        axios.get(`http://localhost:3001/employe/${id}`).then((response) => {
+        axios.get(`${process.env.REACT_APP_API}/employe/${id}`).then((response) => {
             console.log(response.data)
             setTable1(response.data.table1)
             setTable2(response.data.table2)
@@ -87,6 +90,51 @@ function ViewEmploye() {
     const todayAnneeTable7 = todayFunction(anneeTable7)
     const todayDateTable8 = todayFunction(dateTable8)
 
+    // Csv + Pdf
+    const handleBtnExportPdf = (matricule) => {
+        const headers1 = [["Matricule", "Nom", "Prénom", "Address", "Region"]];
+        const data1 = table1.map(elt => [elt.matricule, elt.nom, elt.prenom, elt.address, elt.region]);
+        const headers2 = [["Post", "Employer", "Date_debut", "Date_fin"]];
+        const data2 = table2.map(elt => [elt.post_oc, elt.employer, todayDebutTable2, todayFinTable2]);
+        const headers3 = [["Post", "Structure", "Date_debut", "Date_fin"]];
+        const data3 = table3.map(elt => [elt.post_oc, elt.structure, todayDebutTable3, todayFinTable3]);
+        const headers4 = [["Intitule", "Organisme", "Date", "Duree", "Titre"]];
+        const data4 = table4.map(elt => [elt.intitule, elt.organisme, todayDateTable4, elt.duree, elt.titre]);
+        const headers5 = [["Salaire Ini", "Salaire rev", "Date", "Gain", "Motif"]];
+        const data5 = table5.map(elt => [elt.salaire_initial, elt.salaire_rev, todayDateTable5, elt.gain, elt.motif]);
+        const headers6 = [["Designation", "Auteur", "Date", "Griefs"]];
+        const data6 = table6.map(elt => [elt.designation, elt.auteur, todayDateTable5, elt.griefs]);
+        const headers7 = [["Abscence irr", "Abscence aut", "Annee", "Conge"]];
+        const data7 = table7.map(elt => [elt.absence_irr, elt.absence_aut, todayAnneeTable7, elt.address, elt.conge]);
+        const headers8 = [["Designation", "Nature", "Date", "Duree"]];
+        const data8 = table8.map(elt => [elt.designation, elt.nature, todayDateTable8, elt.duree]);
+
+        let content1 = { startY: 25, head: headers1, body: data1 };
+        let content2 = { startY: height, head: headers2, body: data2 };
+        let content3 = { startY: height, head: headers3, body: data3 };
+        let content4 = { startY: height, head: headers4, body: data4 };
+        let content5 = { startY: height, head: headers5, body: data5 };
+        let content6 = { startY: height, head: headers6, body: data6 };
+        let content7 = { startY: height, head: headers7, body: data7 };
+        let content8 = { startY: height, head: headers8, body: data8 };
+
+        const doc = new jsPDF();
+        var height = doc.internal.pageSize.height;
+        doc.text(`Matricule: ${matricule}`, 15, 20);
+        doc.autoTable(content1);
+        doc.autoTable(content2);
+        doc.autoTable(content3);
+        doc.autoTable(content4);
+        doc.autoTable(content5);
+        doc.autoTable(content6);
+        doc.autoTable(content7);
+        doc.autoTable(content8);
+        doc.save("a4.pdf");
+    }
+    const handleBtnExportCsv = (matricule) => {
+        console.log(matricule)
+    }
+
 
     return (
         <>
@@ -120,6 +168,8 @@ function ViewEmploye() {
                                                 <th>Region</th>
                                                 <th>Diplome</th>
                                                 <th>Specialité</th>
+                                                <th>CSV</th>
+                                                <th>PDF</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -137,6 +187,8 @@ function ViewEmploye() {
                                                     <td> {row['region']} </td>
                                                     <td> {row['diplome']} </td>
                                                     <td> {row['specialite']} </td>
+                                                    <td> <button className="btn btn-secondary" onClick={() => handleBtnExportCsv(row['matricule'])}>Csv</button> </td>
+                                                    <td> <button className="btn btn-danger" onClick={() => handleBtnExportPdf(row['matricule'])}>Pdf</button> </td>
                                                 </tr>
                                             })}
                                         </tbody>

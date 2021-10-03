@@ -1,6 +1,9 @@
 import React, { useRef, useContext } from 'react'
 import Context from '../../context/Context'
 import axios from 'axios'
+
+import CloseIcon from '@mui/icons-material/Close';
+
 import './model.css'
 
 
@@ -27,7 +30,7 @@ function DeleteModel({ emp_id, listen, setListen }) {
 
     const handleBtnDelete = () => {
         overlay.current.classList.remove('active')
-        axios.post(`http://localhost:3001/del`, { emp_id }).then((response) => {
+        axios.post(`${process.env.REACT_APP_API}/del`, { emp_id }).then((response) => {
             console.log(response.data)
             setListen(!listen)
             window.alert(response.data)
@@ -47,7 +50,7 @@ function DeleteModel({ emp_id, listen, setListen }) {
 
                     <div className="model-header">
                         <h2>Delete Account ?</h2>
-                        <i className="fas fa-times" ref={btnClose} onClick={handleCloseModel}></i>
+                        <CloseIcon sx={{ color: '#A3A4B0', cursor: 'pointer' }} ref={btnClose} onClick={handleCloseModel} />
                     </div>
 
                     <div className="model-content">
