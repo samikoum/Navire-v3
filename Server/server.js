@@ -34,6 +34,7 @@ app.use('/', require('./routes/deleteProcess'))
 app.use('/', require('./routes/userProcess'))
 app.use('/', require('./routes/fileUpload'))
 app.use('/', require('./routes/generateProcess'))
+app.use('/', require('./routes/adminSession'))
 app.use('/', verifyToken, require('./routes/userSession'))
 
 

@@ -26,6 +26,10 @@ function Login() {
         resolver: yupResolver(schema)
     })
 
+    useEffect(() => {
+        document.title = "login"
+    }, [])
+
     // Form Submit 
     const submitForm = (data) => {
         setLoader(true)

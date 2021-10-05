@@ -2,12 +2,19 @@ import React, { useEffect, useContext } from 'react'
 import Context from '../context/Context'
 import NavAddEmploye from './navBar/NavAddEmploye';
 import UpdateProfile from './delete/UpdateProfile';
+import UpdatePassword from './delete/UpdatePassword';
 import HeaderRight from './includes/HeaderRight';
+
+import EditIcon from '@material-ui/icons/Edit';
+
 function Profile() {
-    const { roww, coll__1, coll__2, handleClickMenu, iconMenu, overlayUpdate } = useContext(Context)
+    const { roww, coll__1, coll__2, handleClickMenu, iconMenu, overlayUpdate, overlayPassword } = useContext(Context)
 
     const handleShowModel = () => {
         overlayUpdate.current.classList.add('active')
+    }
+    const handleShowModelPassword = () => {
+        overlayPassword.current.classList.add('active')
     }
 
     // useEffect
@@ -22,6 +29,7 @@ function Profile() {
     return (
         <>
             <UpdateProfile admin_id={JSON.parse(localStorage.getItem('admin')).admin_id} />
+            <UpdatePassword admin_id={JSON.parse(localStorage.getItem('admin')).admin_id} />
             <div className="roww" ref={roww}>
                 <section className="coll-1" ref={coll__1}>
                     <NavAddEmploye current="Profile" />
@@ -59,7 +67,8 @@ function Profile() {
 
                             <div class="box-col-1">
                                 <label for="">Password</label>
-                                <h3>**********</h3>
+                                <h3 style={{ paddingLeft: '6px' }}>**********</h3>
+                                <EditIcon style={{ color: '#FFC107', cursor: 'pointer' }} onClick={handleShowModelPassword} />
                             </div>
                             <hr />
                         </div>

@@ -20,6 +20,7 @@ function UpdateEmploye() {
     const [table5, setTable5] = useState([])
     const [table6, setTable6] = useState([])
     const [table7, setTable7] = useState([])
+    const [table8, setTable8] = useState([])
     const [dateNaissance, setdateNaissance] = useState('')
     const [dateRecrutement, setdateRecrutement] = useState('')
     const [debutTable2, setdebutTable2] = useState('')
@@ -30,6 +31,7 @@ function UpdateEmploye() {
     const [dateTable5, setdateTable5] = useState('')
     const [dateTable6, setdateTable6] = useState('')
     const [anneeTable7, setanneeTable7] = useState('')
+    const [dateTable8, setdateTable8] = useState('')
 
     const { id } = useParams()
 
@@ -45,6 +47,7 @@ function UpdateEmploye() {
             setTable5(response.data.table5)
             setTable6(response.data.table6)
             setTable7(response.data.table7)
+            setTable8(response.data.table8)
             // setDate
             setdateNaissance(response.data.table1[0]['date_naissance'])
             setdateRecrutement(response.data.table1[0]['date_recrutement'])
@@ -56,6 +59,7 @@ function UpdateEmploye() {
             setdateTable5(response.data.table5[0]['date'])
             setdateTable6(response.data.table6[0]['date'])
             setanneeTable7(response.data.table7[0]['annee'])
+            setdateTable8(response.data.table8[0]['date'])
         }).catch((error) => {
             console.log(error)
             if (error.response) {
@@ -85,7 +89,7 @@ function UpdateEmploye() {
     const todayDateTable5 = todayFunction(dateTable5)
     const todayDateTable6 = todayFunction(dateTable6)
     const todayAnneeTable7 = todayFunction(anneeTable7)
-
+    const todayDateTable8 = todayFunction(dateTable8)
 
 
 
@@ -320,6 +324,34 @@ function UpdateEmploye() {
                                                 <td> {todayAnneeTable7}  </td>
                                                 <td> {row['conge']}   </td>
                                                 <td><Link to={`/employe/update__7/${row['ass_id']}`}> <button className="btn btn-warning">Edit</button> </Link></td>
+                                            </tr>
+                                        })}
+                                    </tbody>
+                                </table>
+                                {/* <!-- Eigth Table --> */}
+                                <div className="table-title">
+                                    <h3>Gratification</h3>
+                                </div>
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Matricule</th>
+                                            <th>Designation</th>
+                                            <th>Nature</th>
+                                            <th>Date</th>
+                                            <th>Duree</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {table8.map(row => {
+                                            return <tr>
+                                                <td> {row['matricule']}   </td>
+                                                <td> {row['designation']}  </td>
+                                                <td> {row['nature']}  </td>
+                                                <td> {todayDateTable8}  </td>
+                                                <td> {row['duree']}   </td>
+                                                <td><Link to={`/employe/update__8/${row['gra_id']}`}> <button className="btn btn-warning">Edit</button> </Link></td>
                                             </tr>
                                         })}
                                     </tbody>

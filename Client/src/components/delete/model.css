@@ -131,6 +131,13 @@
   font-size: 15px;
   color: #333;
 }
+.user-input-wrp .i-eye {
+  position: absolute;
+	top: 32px;
+	right: 10px;
+  color: #858796;
+  cursor: pointer;
+}
 
 .model-update-footer {
   padding: 10px ;

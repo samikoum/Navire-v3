@@ -37,6 +37,7 @@ import UpdateEmploye__4 from './components/update/UpdateEmploye__4';
 import UpdateEmploye__5 from './components/update/UpdateEmploye__5';
 import UpdateEmploye__6 from './components/update/UpdateEmploye__6';
 import UpdateEmploye__7 from './components/update/UpdateEmploye__7';
+import UpdateEmploye__8 from './components/update/UpdateEmploye__8';
 
 // View Employe
 import ViewEmploye from './components/view/ViewEmploye';
@@ -86,6 +87,7 @@ function App() {
   const btnClose = useRef(null)
   const btnCancel = useRef(null)
   const modelAddDocument = useRef(null)
+  const overlayPassword = useRef(null)
 
 
   const step__1 = useRef(null)
@@ -135,7 +137,7 @@ function App() {
           roww, coll__1, coll__2, handleClickMenu, iconMenu, iconCloseMenu, handleCloseMenu,
           step__1, step__2, step__3, step__4, step__5, step__6, step__7, step__8,
           loader, setLoader, btnNext, modelAddDocument,
-          btnShowModel, overlay, overlayAdd, overlayUpdate, btnClose, btnCancel,
+          btnShowModel, overlay, overlayAdd, overlayUpdate, overlayPassword, btnClose, btnCancel,
           NotificationIconClick, setNotificationIconClick, notifIcon, isCall, setIsCall
         }}>
         <Router>
@@ -376,6 +378,13 @@ function App() {
               exact
               path="/employe/update__7/:id"
               component={UpdateEmploye__7}
+              isAuth={isAuth}
+              setIsAuth={setIsAuth}
+            />
+            <ProtectedRoute
+              exact
+              path="/employe/update__8/:id"
+              component={UpdateEmploye__8}
               isAuth={isAuth}
               setIsAuth={setIsAuth}
             />

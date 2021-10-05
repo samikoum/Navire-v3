@@ -39,7 +39,7 @@ function ViewEmploye() {
     // useEffect
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API}/employe/${id}`).then((response) => {
-            console.log(response.data)
+            // console.log(response.data)
             setTable1(response.data.table1)
             setTable2(response.data.table2)
             setTable3(response.data.table3)

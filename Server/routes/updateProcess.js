@@ -191,6 +191,30 @@ annee='${date}',conge='${conge}' WHERE ass_id='${id}'`
 
 })
 
+//------------------------------update__6--------------------------------
+router.post('/edit_8', (req, res) => {
+
+    const { id } = req.body.id
+
+    const { designation, nature, date, duree } = req.body.data
+
+    //check if there is a user with that matricule
+
+    // update data into table
+    sql2 = `UPDATE gratification SET designation='${designation}',nature='${nature}',
+date='${date}',duree='${duree}' WHERE gra_id='${id}'`
+    con.query(sql2, (err, update) => {
+        if (err) {
+            console.log(err)
+            return res.status(402).send('Something went wrong !')
+        }
+        res.json({ msg: 'Successfully updated' })
+    })
+
+
+
+})
+
 
 
 
