@@ -20,7 +20,7 @@ function NavUser({ current }) {
         localStorage.removeItem('user')
         localStorage.removeItem('isAuth')
         setIsAuth(localStorage.getItem('isAuth'))
-        history.push('/login')
+        history.push('/')
     }
     return (
         <>

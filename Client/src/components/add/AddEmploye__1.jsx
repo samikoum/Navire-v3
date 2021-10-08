@@ -40,7 +40,7 @@ function AddEmploye__1() {
     }
 
     const handleBtnPrevious = () => {
-        return history.push('/employe')
+        return history.push('/employers')
     }
 
     // Yup

@@ -9,7 +9,6 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import './model.css'
 
 
-
 function UpdateModel({ emp_id }) {
     // useContext
     const { btnClose, btnCancel, overlayUpdate, setIsAuth } = useContext(Context)
@@ -17,7 +16,7 @@ function UpdateModel({ emp_id }) {
     // useState
     const [nom, setNom] = useState(JSON.parse(localStorage.getItem('user')).nom)
     const [prenom, setPrenom] = useState(JSON.parse(localStorage.getItem('user')).prenom)
-    const [password, setPassword] = useState(JSON.parse(localStorage.getItem('user')).password)
+    const [password, setPassword] = useState('')
 
     // useRef
     const modelUpdate = useRef(null)
@@ -58,8 +57,8 @@ function UpdateModel({ emp_id }) {
             { headers: { "Authorization": `${JSON.parse(localStorage.getItem('user')).token}` } })
             .then((response) => {
                 console.log(response.data)
+                setPassword('')
                 window.alert(response.data)
-                reset()
             }).catch((error) => {
                 if (error.response) {
                     if (error.response.status == 403) {

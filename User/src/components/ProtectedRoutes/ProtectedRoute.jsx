@@ -34,7 +34,7 @@ function ProtectedRoute({ isAuth: isAuth, component: Component, ...rest }) {
                         return <Component />
                     } else {
                         localStorage.removeItem('user')
-                        return <Redirect to={{ pathname: "/login" }} />
+                        return <Redirect to={{ pathname: "/" }} />
                     }
                 }}
             >

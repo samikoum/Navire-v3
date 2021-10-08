@@ -53,7 +53,7 @@ function AddEmploye__8() {
             localStorage.removeItem('mat')
             localStorage.removeItem('isX')
             setIsX(localStorage.getItem('isX'))
-            return history.push('/add__1')
+            return history.push('/employers')
         }
     }
 

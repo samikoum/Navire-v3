@@ -96,7 +96,7 @@ function App() {
             {/*----------User--------------*/}
             <ProtectedLogin
               exact
-              path="/login"
+              path="/"
               component={LoginUser}
               isAuth={isAuth}
               setIsAuth={setIsAuth}

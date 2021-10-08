@@ -91,8 +91,7 @@ router.post('/user/login', (req, res) => {
                 user_id: select[0].emp_id,
                 nom: select[0].nom,
                 prenom: select[0].prenom,
-                matricule: select[0].matricule,
-                password: password
+                matricule: select[0].matricule
             },
             auth: true
         })

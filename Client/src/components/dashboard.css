@@ -13,9 +13,14 @@
 .recharts__1 .graph-1 {
     margin-right: 30px;
     margin-bottom: 30px;
+    max-width: 620px;
+    /* border:1px solid red; */
 }
 .recharts__1 .graph-2 {
+    margin-right: 30px;
     margin-bottom: 30px;
+    /* border: 1px solid chartreuse; */
+    max-width: 620px;
 }
 .graph {
     background: red;
