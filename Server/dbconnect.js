@@ -16,7 +16,6 @@ const mysql = require('mysql');
     }
     else {
         console.log("Connection failed")
-        return res.status(401).send('Connection Failed to Database !')
     }
   })
 

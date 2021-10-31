@@ -54,5 +54,119 @@ router.post('/delete', (req, res) => {
 
 })
 
+//------------------------------Delete from tables--------------------------------
+router.post('/table2/delete', (req, res) => {
+
+    const { rec_id } = req.body
+
+    // update data into table
+    sql = `DELETE FROM exprofessionnelle  WHERE exp_id='${rec_id}'`
+    con.query(sql, (err, del) => {
+        if (err) {
+            console.log(err)
+            return res.status(402).send('Something went wrong !')
+        }
+        res.send('Successfully Deleted !')
+    })
+
+})
+
+router.post('/table3/delete', (req, res) => {
+
+    const { rec_id } = req.body
+
+    // update data into table
+    sql = `DELETE FROM evocarriere  WHERE evo_id='${rec_id}'`
+    con.query(sql, (err, del) => {
+        if (err) {
+            console.log(err)
+            return res.status(402).send('Something went wrong !')
+        }
+        res.send('Successfully Deleted !')
+    })
+
+})
+
+router.post('/table4/delete', (req, res) => {
+
+    const { rec_id } = req.body
+
+    // update data into table
+    sql = `DELETE FROM formationpro  WHERE for_id='${rec_id}'`
+    con.query(sql, (err, del) => {
+        if (err) {
+            console.log(err)
+            return res.status(402).send('Something went wrong !')
+        }
+        res.send('Successfully Deleted !')
+    })
+
+})
+
+router.post('/table5/delete', (req, res) => {
+
+    const { rec_id } = req.body
+
+    // update data into table
+    sql = `DELETE FROM revsalairiale  WHERE rev_id='${rec_id}'`
+    con.query(sql, (err, del) => {
+        if (err) {
+            console.log(err)
+            return res.status(402).send('Something went wrong !')
+        }
+        res.send('Successfully Deleted !')
+    })
+
+})
+
+router.post('/table6/delete', (req, res) => {
+
+    const { rec_id } = req.body
+
+    // update data into table
+    sql = `DELETE FROM mesures_disc  WHERE mes_id='${rec_id}'`
+    con.query(sql, (err, del) => {
+        if (err) {
+            console.log(err)
+            return res.status(402).send('Something went wrong !')
+        }
+        res.send('Successfully Deleted !')
+    })
+
+})
+
+// Delete Assiduité 
+router.post('/table7/delete', (req, res) => {
+
+    const { rec_id } = req.body
+
+    // update data into table
+    sql = `DELETE FROM assiduite  WHERE ass_id='${rec_id}'`
+    con.query(sql, (err, del) => {
+        if (err) {
+            console.log(err)
+            return res.status(402).send('Something went wrong !')
+        }
+        res.send('Successfully Deleted !')
+    })
+
+})
+
+router.post('/table8/delete', (req, res) => {
+
+    const { rec_id } = req.body
+
+    // update data into table
+    sql = `DELETE FROM gratification  WHERE gra_id='${rec_id}'`
+    con.query(sql, (err, del) => {
+        if (err) {
+            console.log(err)
+            return res.status(402).send('Something went wrong !')
+        }
+        res.send('Successfully Deleted !')
+    })
+
+})
+
 
 module.exports = router

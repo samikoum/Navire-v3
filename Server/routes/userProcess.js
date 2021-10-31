@@ -86,7 +86,7 @@ router.post('/documents/delete', (req, res) => {
 // get Reclamations
 router.get('/reclamations', (req, res) => {
 
-    sql = "SELECT *, SubString(description, 1, 100) AS description from users u, reclamation r WHERE u.emp_id=r.sender   ORDER BY r.rec_id DESC"
+    sql = "SELECT *, SubString(description, 1, 70) AS description from users u, reclamation r WHERE u.emp_id=r.sender   ORDER BY r.rec_id DESC"
     con.query(sql, (err, data) => {
         if (err) {
             console.log(err)

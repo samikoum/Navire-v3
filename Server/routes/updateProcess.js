@@ -12,7 +12,8 @@ router.post('/edit_1', (req, res) => {
 
     const { matricule, prenom, nom, address, situation,
         nombreEnfants, ascendant, dateNaissance,
-        dateRecrutement, structure, region, diplome, specialite } = req.body.data
+        dateRecrutement, structure, region, diplome, specialite,
+        sexe, nationalite, piece } = req.body.data
 
     //check if there is a user with that matricule
     sql = `SELECT * from rgeneraux where matricule='${matricule}' AND rg_id!=${id}; `
@@ -27,11 +28,12 @@ router.post('/edit_1', (req, res) => {
         }
 
         // update data into table
-        sql2 = `UPDATE  rgeneraux SET matricule='${matricule}' , prenom='${prenom}',nom='${nom}',address='${address}',
-   s_famille='${situation}',n_enfants='${nombreEnfants}',ascendant='${ascendant}',
+        sql2 = `UPDATE  rgeneraux SET matricule='${matricule}' , prenom='${prenom}',nom='${nom}',address="${address}",
+   s_famille='${situation}',n_enfants='${nombreEnfants}',ascendant="${ascendant}",
    date_naissance='${dateNaissance}',date_recrutement='${dateRecrutement}',
-   structure='${structure}',region='${region}',diplome='${diplome}',
-   specialite='${specialite}' WHERE rg_id='${id}'; `
+   structure="${structure}",region='${region}',diplome="${diplome}",
+   specialite="${specialite}", sexe="${sexe}",
+   nationalite="${nationalite}",piece="${piece}" WHERE rg_id='${id}'; `
         sql22 = `UPDATE ExProfessionnelle SET matricule='${matricule}' WHERE matricule='${select[1][0]['matricule']}'; `
         sql3 = `UPDATE evocarriere SET matricule='${matricule}' WHERE matricule='${select[1][0]['matricule']}'; `
         sql4 = `UPDATE formationpro SET matricule='${matricule}' WHERE matricule='${select[1][0]['matricule']}'; `
@@ -58,13 +60,13 @@ router.post('/edit_2', (req, res) => {
 
     const { id } = req.body.id
 
-    const { post, employer, debut, fin } = req.body.data
+    const { post, employer, debut, fin, contrat } = req.body.data
 
     //check if there is a user with that matricule
 
     // update data into table
-    sql2 = `UPDATE ExProfessionnelle SET post_oc='${post}',employer='${employer}',
-date_debut='${debut}',date_fin='${fin}' WHERE exp_id='${id}'`
+    sql2 = `UPDATE ExProfessionnelle SET post_oc="${post}",employer="${employer}",
+date_debut='${debut}',date_fin='${fin}', contrat="${contrat}" WHERE exp_id='${id}'`
     con.query(sql2, (err, update) => {
         if (err) {
             console.log(err)
@@ -81,13 +83,13 @@ router.post('/edit_3', (req, res) => {
 
     const { id } = req.body.id
 
-    const { post, structure, debut, fin } = req.body.data
+    const { post, structure, debut, fin, carriere } = req.body.data
 
     //check if there is a user with that matricule
 
     // update data into table
-    sql2 = `UPDATE evocarriere SET post_oc='${post}',structure='${structure}',
-date_debut='${debut}',date_fin='${fin}' WHERE evo_id='${id}'`
+    sql2 = `UPDATE evocarriere SET post_oc="${post}",structure="${structure}",
+date_debut='${debut}',date_fin='${fin}', carriere="${carriere}" WHERE evo_id='${id}'`
     con.query(sql2, (err, update) => {
         if (err) {
             console.log(err)
@@ -109,8 +111,8 @@ router.post('/edit_4', (req, res) => {
     //check if there is a user with that matricule
 
     // update data into table
-    sql2 = `UPDATE formationpro SET intitule='${intitule}',organisme='${organisme}',
-date='${date}',duree='${duree}',titre='${titre}' WHERE for_id='${id}' `
+    sql2 = `UPDATE formationpro SET intitule="${intitule}",organisme="${organisme}",
+date='${date}',duree='${duree}',titre="${titre}" WHERE for_id='${id}' `
     con.query(sql2, (err, update) => {
         if (err) {
             console.log(err)
@@ -133,7 +135,7 @@ router.post('/edit_5', (req, res) => {
 
     // update data into table
     sql2 = `UPDATE RevSalairiale SET salaire_initial='${salaire_ini}',salaire_rev='${salaire_reval}',
-date='${date}',gain='${gain}',motif='${motif}' WHERE rev_id='${id}' `
+date='${date}',gain="${gain}",motif="${motif}" WHERE rev_id='${id}' `
     con.query(sql2, (err, update) => {
         if (err) {
             console.log(err)
@@ -150,13 +152,13 @@ router.post('/edit_6', (req, res) => {
 
     const { id } = req.body.id
 
-    const { designation, auteur, date, griefs } = req.body.data
+    const { designation, auteur, date, griefs, degree } = req.body.data
 
     //check if there is a user with that matricule
 
     // update data into table
-    sql2 = `UPDATE mesures_disc SET designation='${designation}',auteur='${auteur}',
-date='${date}',griefs='${griefs}' WHERE mes_id='${id}'`
+    sql2 = `UPDATE mesures_disc SET designation="${designation}",auteur="${auteur}",
+date='${date}',griefs="${griefs}", degree="${degree}" WHERE mes_id='${id}'`
     con.query(sql2, (err, update) => {
         if (err) {
             console.log(err)
@@ -174,13 +176,13 @@ router.post('/edit_7', (req, res) => {
 
     const { id } = req.body.id
 
-    const { absence_irr, absence_aut, date, conge } = req.body.data
+    const { absence_irr, date, date_fin, conge } = req.body.data
 
     //check if there is a user with that matricule
 
     // update data into table
-    sql2 = `UPDATE assiduite SET  absence_irr='${absence_irr}',absence_aut='${absence_aut}',
-annee='${date}',conge='${conge}' WHERE ass_id='${id}'`
+    sql2 = `UPDATE assiduite SET  absence_irr='${absence_irr}',annee='${date}',
+    date_fin='${date_fin}', conge='${conge}' WHERE ass_id='${id}'`
     con.query(sql2, (err, update) => {
         if (err) {
             console.log(err)
@@ -196,13 +198,13 @@ router.post('/edit_8', (req, res) => {
 
     const { id } = req.body.id
 
-    const { designation, nature, date, duree } = req.body.data
+    const { designation, nature, date, date_retour, duree, duree_rest } = req.body.data
 
     //check if there is a user with that matricule
 
     // update data into table
-    sql2 = `UPDATE gratification SET designation='${designation}',nature='${nature}',
-date='${date}',duree='${duree}' WHERE gra_id='${id}'`
+    sql2 = `UPDATE gratification SET designation="${designation}",nature="${nature}",
+date='${date}', date_retour='${date_retour}', duree='${duree}', duree_rest='${duree_rest}' WHERE gra_id='${id}'`
     con.query(sql2, (err, update) => {
         if (err) {
             console.log(err)

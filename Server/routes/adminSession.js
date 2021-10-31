@@ -31,9 +31,9 @@ router.post('/adminPassword/edit',async (req,res)=>{
 // --------------------------------Dashboard-------------------------
 router.get('/dashboard', (req, res) => {
 
-    sql1 = "SELECT COUNT(*) as countA from rgeneraux where region='Erenav Alger'; "
-    sql2 = "SELECT COUNT(*) as countO from rgeneraux where region='Erenav Oran'; "
-    sql3 = "SELECT COUNT(*) as countB from rgeneraux where region='Erenav Bejaia'; "
+    sql1 = "SELECT COUNT(*) as countA from rgeneraux where region='Erenav Alger' AND status='on'; "
+    sql2 = "SELECT COUNT(*) as countO from rgeneraux where region='Erenav Oran' AND status='on'; "
+    sql3 = "SELECT COUNT(*) as countB from rgeneraux where region='Erenav Bejaia' AND status='on'; "
     con.query(sql1+sql2+sql3, (err, data) => {
         if (err) {
             console.log(err)

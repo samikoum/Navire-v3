@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const PORT = 3001
+const PORT = 4000
 const cors = require('cors')
 const bodyParser = require('body-parser')
 var session = require('express-session')
@@ -28,6 +28,7 @@ app.get('/verifyToken', verifyToken, (req, res) => {
 
 app.use('/', require('./routes/loginProcess'))
 app.use('/', require('./routes/getDataProcess'))
+app.use('/', require('./routes/getEmployesProcess'))
 app.use('/', require('./routes/addProcess'))
 app.use('/', require('./routes/updateProcess'))
 app.use('/', require('./routes/deleteProcess'))

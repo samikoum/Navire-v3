@@ -36,22 +36,22 @@ router.get('/employe/:id', (req, res) => {
     id = req.params.id
 
     sql = `SELECT * from rgeneraux where matricule='${id}'; `
-    sql2 = `SELECT * from exprofessionnelle where matricule='${id}'; `
-    sql3 = `SELECT * from evocarriere where matricule='${id}'; `
-    sql4 = `SELECT * from formationpro where matricule='${id}'; `
-    sql5 = `SELECT * from revsalairiale where matricule='${id}'; `
-    sql6 = `SELECT * from mesures_disc where matricule='${id}'; `
-    sql7 = `SELECT * from assiduite where matricule='${id}'; `
-    sql8 = `SELECT * from gratification where matricule='${id}'; `
+    sql2 = `SELECT * from exprofessionnelle where matricule='${id}' ORDER BY exp_id  DESC; `
+    sql3 = `SELECT * from evocarriere where matricule='${id}' ORDER BY evo_id  DESC; `
+    sql4 = `SELECT * from formationpro where matricule='${id}' ORDER BY for_id  DESC; `
+    sql5 = `SELECT * from revsalairiale where matricule='${id}' ORDER BY rev_id  DESC; `
+    sql6 = `SELECT * from mesures_disc where matricule='${id}' ORDER BY mes_id  DESC; `
+    sql7 = `SELECT * from assiduite where matricule='${id}' ORDER BY ass_id  DESC; `
+    sql8 = `SELECT * from gratification where matricule='${id}' ORDER BY gra_id  DESC; `
     con.query(sql + sql2 + sql3 + sql4 + sql5 + sql6 + sql7 + sql8, (err, select) => {
-        console.log(select[0].length)
+        // console.log(select[0].length)
         if (err) {
             console.log(err)
             return res.status(400).send('Something went wrong !')
         }
-        if (select[0].length <= 0) {
-            return res.status(404).send('404 not found');
-        }
+        // if (select[0].length <= 0) {
+        //     return res.status(404).send('404 not found');
+        // }
         res.json({
             table1: select[0],
             table2: select[1],
