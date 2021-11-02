@@ -5,7 +5,9 @@ import { Redirect, Route } from 'react-router-dom'
 function ProtectedRoute({ isAuth: isAuth, component: Component, ...rest }) {
 
     const { setIsAuth } = { ...rest }
+   
     useEffect(() => {
+
         if (localStorage.getItem('admin') !== null) {
             axios.get(`${process.env.REACT_APP_API}/verifyToken`,
                 { headers: { "Authorization": `${JSON.parse(localStorage.getItem('admin')).token}` } })

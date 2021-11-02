@@ -153,6 +153,13 @@ function ManageReclamations() {
         })
     }
 
+    if (JSON.parse(localStorage.getItem('admin')).role !== 'super') {
+        return (
+            <div>
+
+            </div>
+        );
+    }
 
 
     return (

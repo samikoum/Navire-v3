@@ -117,8 +117,8 @@ function Employe() {
         })
     }, [listen])
     useEffect(() => {
-        console.log(roww.current.offsetHeight)
-        console.log(window.innerHeight)
+        // console.log(roww.current.offsetHeight)
+        // console.log(window.innerHeight)
         if (roww.current !== null) {
             if (roww.current.offsetHeight < window.innerHeight) {
                 roww.current.style.height = '100vh'
@@ -131,7 +131,6 @@ function Employe() {
     // const todayNaissance = todayFunction(dateNaissance)
 
     // handle functions
-
     const handleRowClick = (e, row) => {
         if (localStorage.getItem('isX') == null || localStorage.getItem('isX') >= 9) {
             localStorage.setItem('mat', row.matricule)
@@ -177,6 +176,13 @@ function Employe() {
     ];
 
 
+    if (JSON.parse(localStorage.getItem('admin')).role !== 'super') {
+        return (
+            <div>
+
+            </div>
+        );
+    }
 
     return (
         <>

@@ -6,6 +6,7 @@ import NavAddEmploye from './navBar/NavAddEmploye';
 import HeaderRight from './includes/HeaderRight';
 import Fade from 'react-reveal/Fade';
 
+import CheckCode from './delete/CheckCode';
 import PeopleIcon from '@mui/icons-material/People';
 
 import {
@@ -60,7 +61,7 @@ const renderCustomizedLabel = ({
 
 // end Recharts js Circle
 function Dashboard() {
-    const { roww, coll__1, coll__2, handleClickMenu, iconMenu } = useContext(Context);
+    const { roww, coll__1, coll__2, handleClickMenu, iconMenu, overlayPassword } = useContext(Context);
 
     // useState
     const [countAlger, setCountAlger] = useState(null)
@@ -68,6 +69,7 @@ function Dashboard() {
     const [countBejaia, setCountBejaia] = useState(null)
     const [data, setData] = useState([])
     const [circleData, setCircleData] = useState([])
+    const [who, setWho] = useState('')
 
     // useHistory
     let history = useHistory()
@@ -99,10 +101,36 @@ function Dashboard() {
         })
     }, [])
 
+    // handle functions
+    const handleShowModelPassword = (w) => {
+        setWho(w)
+        console.log(w)
+        if (JSON.parse(localStorage.getItem('admin')).role == 'super') {
+            switch (w) {
+                case "alger":
+                    history.push('/employers/alger')
+                    break;
+                case "oran":
+                    history.push('/employers/oran')
+                    break;
+                case "bejaia":
+                    history.push('/employers/bejaia')
+                    break;
+            }
+        } else {
+            overlayPassword.current.classList.add('active')
+        }
+    }
+
+
 
 
     return (
         <>
+            <CheckCode
+                admin_id={JSON.parse(localStorage.getItem('admin')).admin_id}
+                w={who}
+            />
             <div className="roww" ref={roww} >
                 <section className="coll-1" ref={coll__1}>
                     <NavAddEmploye current="Dashboard" />
@@ -112,7 +140,7 @@ function Dashboard() {
                     <div className="coll-2-container coll-2-container-dashboard" >
                         <div className="dash-flex-container">
                             <Fade left >
-                                <div className="dash-box-1" onClick={() => history.push('/employers/alger')}>
+                                <div className="dash-box-1" onClick={(w) => handleShowModelPassword(w = 'alger')} >
                                     <div className="dash-flex-left">
                                         <PeopleIcon className="i-mui" />
                                     </div>
@@ -123,7 +151,7 @@ function Dashboard() {
                                 </div>
                             </Fade>
                             <Fade top>
-                                <div className="dash-box-1 dash-box-2" onClick={() => history.push('/employers/oran')}>
+                                <div className="dash-box-1 dash-box-2" onClick={(w) => handleShowModelPassword(w = 'oran')}>
                                     <div className="dash-flex-left">
                                         <PeopleIcon className="i-mui" />
                                     </div>
@@ -134,7 +162,7 @@ function Dashboard() {
                                 </div>
                             </Fade>
                             <Fade right >
-                                <div className="dash-box-1 dash-box-3" onClick={() => history.push('/employers/bejaia')}>
+                                <div className="dash-box-1 dash-box-3" onClick={(w) => handleShowModelPassword(w = 'bejaia')}>
                                     <div className="dash-flex-left">
                                         <PeopleIcon className="i-mui" />
                                     </div>

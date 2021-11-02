@@ -45,21 +45,60 @@ function NavAddEmploye({ current }) {
                         Dashboard
                     </div>
                 </Link>
-                <Link to="/employers">
+
+                {JSON.parse(localStorage.getItem('admin')).role == 'super' ?
+                    <div>
+                        <Link to="/employers">
+                            <div id="employe" className={current == 'Employe' ? 'current dash' : 'dash'}><PeopleIcon className="i-mui" />
+                                Employes
+                            </div>
+                        </Link>
+                        <Link to="/documents">
+                            <div className={current == 'manageDocuments' ? 'current dash' : 'dash'}><DescriptionIcon className="i-mui" />
+                                Gestion Documents
+                            </div>
+                        </Link>
+                        <Link to="/accounts">
+                            <div className={current == 'manageAccounts' ? 'current dash' : 'dash'}><ManageAccountsIcon className="i-mui" />
+                                Gestion Accounts
+                            </div>
+                        </Link>
+                        <Link to="/reclamations">
+                            <div className={current == 'manageReclamations' ? 'current dash' : 'dash'}><ReportProblemIcon className="i-mui" />
+                                Gestion Reclamations
+                            </div>
+                        </Link>
+                        <Link to="/trash">
+                            <div className={current == 'Trash' ? 'current dash' : 'dash'}><RestoreFromTrashIcon className="i-mui" />
+                                Trash
+                            </div>
+                        </Link>
+                    </div>
+                    : JSON.parse(localStorage.getItem('admin')).role == 'alger' ?
+                        <Link to="/employers/alger">
+                            <div id="employe" className={current == 'Employe' ? 'current dash' : 'dash'}><PeopleIcon className="i-mui" />
+                                Employers Alger
+                            </div>
+                        </Link>
+                        : JSON.parse(localStorage.getItem('admin')).role == 'oran' ?
+                            <Link to="/employers/oran">
+                                <div id="employe" className={current == 'Employe' ? 'current dash' : 'dash'}><PeopleIcon className="i-mui" />
+                                    Employers Oran
+                                </div>
+                            </Link>
+                            : JSON.parse(localStorage.getItem('admin')).role == 'bejaia' ?
+                                <Link to="/employers/bejaia">
+                                    <div id="employe" className={current == 'Employe' ? 'current dash' : 'dash'}><PeopleIcon className="i-mui" />
+                                        Employers Bejaia
+                                    </div>
+                                </Link>
+                                : null}
+                {/* <Link to="/employers">
                     <div id="employe" className={current == 'Employe' ? 'current dash' : 'dash'}><PeopleIcon className="i-mui" />
                         Employes
                     </div>
                 </Link>
-                {/* <div className="region">
-                    <Link to="/users/alger"> <p>Erenav Alger</p></Link>
-                    <Link to="/users/oran"> <p>Erenav Oran</p></Link>
-                    <Link to="/users/bejaia"><p>Erenav Bejaia</p></Link>
-                </div> */}
-                {/* <Link to="/add__1">
-                    <div className={current == 'AddEmploye' ? 'current dash' : 'dash'}><PersonAddIcon className="i-mui" />
-                        Add New Employe
-                    </div>
-                </Link> */}
+
                 <Link to="/documents">
                     <div className={current == 'manageDocuments' ? 'current dash' : 'dash'}><DescriptionIcon className="i-mui" />
                         Gestion Documents
@@ -79,7 +118,7 @@ function NavAddEmploye({ current }) {
                     <div className={current == 'Trash' ? 'current dash' : 'dash'}><RestoreFromTrashIcon className="i-mui" />
                         Trash
                     </div>
-                </Link>
+                </Link> */}
                 <div className="dash" onClick={logout}><MeetingRoomIcon className="i-mui" />
                     Logout
                 </div>
@@ -90,5 +129,7 @@ function NavAddEmploye({ current }) {
         </>
     )
 }
+
+
 
 export default NavAddEmploye

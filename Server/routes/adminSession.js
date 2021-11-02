@@ -3,6 +3,29 @@ const router = express.Router()
 const bcrypt = require('bcryptjs');
 
 
+// --------------------------------Check Code----------------------------
+router.post('/checkCode',async (req,res)=>{
+  
+    const { admin_id } = req.body
+    const { w } = req.body
+    const { password } = req.body.data
+
+         try {
+            sql2 = `SELECT * FROM admins WHERE admin_id='${admin_id}'`
+            con.query(sql2, (err, select) => {
+                if (err)  return res.status(402).send('Something went wrong !') 
+                if(select[0].role !== w) return res.status(403).send('Code Invalid')
+                if(select[0].code !== password) return res.status(403).send('Code Invalid')
+                res.status(200).send(select[0].role)
+            })
+        } catch (err) {
+            res.status(402).send('Something is wrong try again !');
+        }
+   
+})
+
+
+
 // --------------------------------Update Profile-------------------------
 router.post('/adminPassword/edit',async (req,res)=>{
   

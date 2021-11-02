@@ -63,6 +63,14 @@ function Trash() {
         })
     }
 
+    if (JSON.parse(localStorage.getItem('admin')).role !== 'super') {
+        return (
+            <div>
+
+            </div>
+        );
+    }
+
     return (
         <>
             <ModelDef emp_id={emp_id} listen={listen} setListen={setListen} />

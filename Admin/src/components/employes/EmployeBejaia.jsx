@@ -38,7 +38,7 @@ import { jsPDF } from "jspdf";
 
 
 function EmployeBejaia() {
-    const { roww, coll__1, coll__2, handleClickMenu, iconMenu, overlay } = useContext(Context);
+    const { roww, coll__1, coll__2, handleClickMenu, iconMenu, overlay, setIsX } = useContext(Context);
     const [employes, setEmployes] = useState([])
     const [spinner, setSpinner] = useState(false)
     const [emp_id, setemp_id] = useState('')
@@ -91,7 +91,7 @@ function EmployeBejaia() {
             cellStyle: { padding: '8px', width: '25%' }
         },
         {
-            title: "Region",
+            title: "Unité",
             field: "region",
             sorting: false,
             cellStyle: { padding: '8px' }
@@ -117,8 +117,8 @@ function EmployeBejaia() {
         })
     }, [listen])
     useEffect(() => {
-        console.log(roww.current.offsetHeight)
-        console.log(window.innerHeight)
+        // console.log(roww.current.offsetHeight)
+        // console.log(window.innerHeight)
         if (roww.current !== null) {
             if (roww.current.offsetHeight < window.innerHeight) {
                 roww.current.style.height = '100vh'
@@ -131,6 +131,19 @@ function EmployeBejaia() {
     // const todayNaissance = todayFunction(dateNaissance)
 
     // handle functions
+    const handleRowClick = (e, row) => {
+        if (localStorage.getItem('isX') == null || localStorage.getItem('isX') >= 9) {
+            localStorage.setItem('mat', row.matricule)
+            localStorage.setItem('isX', 9)
+            setIsX(localStorage.getItem('isX'))
+            // const rec_id = row.rec_id
+            history.push(`/add__1`)
+        } else {
+            window.alert('Something in process...')
+        }
+
+    }
+
     const handleBtnExportPdf = () => {
 
         const headers = [["Matricule", "Nom", "Prénom", "Date Naissance", "Address", "Region"]];
@@ -162,6 +175,14 @@ function EmployeBejaia() {
         { label: "Region", key: "region" },
     ];
 
+    if (JSON.parse(localStorage.getItem('admin')).role == 'alger' || JSON.parse(localStorage.getItem('admin')).role == 'oran') {
+        return (
+            <div>
+
+            </div>
+        );
+    }
+
     return (
         <>
             <Model emp_id={emp_id} listen={listen} setListen={setListen} />
@@ -178,7 +199,7 @@ function EmployeBejaia() {
                                 columns={columns}
                                 data={employes}
                                 icons={tableIcons}
-
+                                onRowClick={(e, row) => handleRowClick(e, row)}
                                 options={{
                                     pageSizeOptions: [10, 20, 30, 40, 50], pageSize: 10, paginationType: "stepped",
                                     // exportButton: true, exportAllData: true, exportFileName: "Employers",
@@ -210,7 +231,16 @@ function EmployeBejaia() {
                                         icon: () => <AddCircleIcon style={{ fontSize: '40px', color: '#4BB543' }} />,
                                         isFreeAction: true,
                                         onClick: () => {
-                                            history.push('/add__1')
+                                            if (localStorage.getItem('isX') >= 9) {
+                                                localStorage.removeItem('mat')
+                                                localStorage.removeItem('isX')
+                                                setIsX(localStorage.getItem('isX'))
+                                                // const rec_id = row.rec_id
+                                                history.push(`/add__1`)
+                                            } else {
+                                                history.push(`/add__1`)
+                                            }
+                                            // history.push('/add__1')
                                         }
 
                                     },

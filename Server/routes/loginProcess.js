@@ -32,7 +32,8 @@ router.post('/login', (req, res) => {
                 admin_id: select[0].admin_id,
                 nom: select[0].nom,
                 prenom: select[0].prenom,
-                email: select[0].email
+                email: select[0].email,
+                role:select[0].role
             },
             auth: true
         })

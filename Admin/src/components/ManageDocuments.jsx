@@ -156,6 +156,14 @@ function ManageDocuments() {
         })
     }
 
+    if (JSON.parse(localStorage.getItem('admin')).role !== 'super') {
+        return (
+            <div>
+
+            </div>
+        );
+    }
+
     return (
         <>
             <AddDocumentModel listen={listen} setListen={setListen} />

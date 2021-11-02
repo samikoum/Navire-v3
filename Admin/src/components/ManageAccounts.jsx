@@ -141,6 +141,14 @@ function ManageAccounts() {
         { label: "Prénom", key: "prenom" },
     ];
 
+    if (JSON.parse(localStorage.getItem('admin')).role !== 'super') {
+        return (
+            <div>
+
+            </div>
+        );
+    }
+
 
     return (
         <>
