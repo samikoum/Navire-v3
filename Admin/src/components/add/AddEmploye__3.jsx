@@ -11,6 +11,7 @@ import NavAddEmploye from '../navBar/NavAddEmploye'
 import todayUpdateFunction from '../function/TodayUpdate'
 import HeaderRight from '../includes/HeaderRight'
 import Spinner from '../Spinner'
+import ScrollToTop from '../ScrollToTop'
 //--------------------------import Table------------------------
 // Matriel-table
 import MaterialTable from 'material-table';
@@ -205,7 +206,8 @@ function AddEmploye__3() {
     const handleBtnDeleteRow = (e, row) => {
         console.log(row.ass_id)
         const rec_id = row.evo_id
-        axios.post(`${process.env.REACT_APP_API}/table3/delete`, { rec_id }).then((response) => {
+        const matricule = row.matricule
+        axios.post(`${process.env.REACT_APP_API}/table3/delete`, { matricule, rec_id }).then((response) => {
             console.log(response.data)
             setListen(!listen)
             window.alert(response.data)
@@ -219,9 +221,19 @@ function AddEmploye__3() {
 
     }
 
+    var row__1 = []
+    var row__2 = []
+    for (let i = 1; i <= 22; i++) {
+        row__1.push(i)
+    }
+    for (let i = 1; i <= 20; i++) {
+        row__2.push(i)
+    }
+
 
     return (
         <>
+            <ScrollToTop />
             <div className="roww" ref={roww} >
                 <section className="coll-1" ref={coll__1}>
                     <NavAddEmploye current="Employe" />
@@ -256,7 +268,6 @@ function AddEmploye__3() {
                                 </div>
                             </div>
 
-
                             <div className="two-input">
                                 <div className="user-input-wrp">
                                     <br />
@@ -281,13 +292,98 @@ function AddEmploye__3() {
                                 </div>
                             </div>
 
-                            <div className="user-input-wrp">
-                                <br />
-                                <select className="inputText"  {...register("carriere")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
-                                    <option selected disabled value="">Type de Carriére</option>
-                                    <option value="Interne">Interne</option>
-                                    <option value="Externe">Externe</option>
-                                </select>
+                            <div className="two-input">
+                                <div className="user-input-wrp" >
+                                    <br />
+                                    <select className="inputText"  {...register("motif")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
+                                        <option selected disabled value="">Motif du contrat</option>
+                                        <option value="Reconduction">Reconduction</option>
+                                        <option value="Promotion">Promotion</option>
+                                        <option value="Redéploiement">Redéploiement</option>
+                                        <option value="Mutation">Mutation</option>
+                                        <option value="Autres">Autres</option>
+                                    </select>
+                                </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="text"
+                                        className="inputText"
+                                        {...register("decision")}
+                                        required
+                                    />
+                                    <span className="floating-label">Décision</span>
+                                    <p>{errors.nom?.message}</p>
+                                </div>
+                            </div>
+
+                            <div className="two-input">
+                                <div className="user-input-wrp" >
+                                    <br />
+                                    <select className="inputText"  {...register("contrat")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
+                                        <option selected disabled value="">Nature de Contrat</option>
+                                        <option value="cdi">cdi</option>
+                                        <option value="cdd">cdd</option>
+                                        <option value="stagiare">stagiare</option>
+                                        <option value="autres">autres</option>
+                                    </select>
+                                </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="inputText"
+                                        {...register("num_annee")}
+                                        required
+                                    />
+                                    <span className="floating-label">Nombre d'années travaillés</span>
+                                    <p>{errors.nom?.message}</p>
+                                </div>
+                            </div>
+
+                            <div className="two-input">
+                                <div className="user-input-wrp" >
+                                    <br />
+                                    <select className="inputText"  {...register("classe")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
+                                        <option selected disabled value="">Classe</option>
+                                        {row__1.map((classe, key) => {
+                                            return <option value={`${classe}`} key={key}>{classe <= 9 ? 0 + '' + classe : classe}</option>
+                                        })}
+                                    </select>
+                                </div>
+                                <div className="user-input-wrp" >
+                                    <br />
+                                    <select className="inputText"  {...register("qualification")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
+                                        <option selected disabled value="">Qualification</option>
+                                        {row__2.map((qualification, key) => {
+                                            return <option value={`${qualification}`} key={key}>{qualification <= 9 ? 0 + '' + qualification : qualification}</option>
+                                        })}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="two-input">
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="inputText"
+                                        {...register("salaire")}
+                                        required
+                                    />
+                                    <span className="floating-label">Salaire de base</span>
+                                    <p>{errors.nom?.message}</p>
+                                </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <select className="inputText"  {...register("carriere")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
+                                        <option selected disabled value="">Type de Carriére</option>
+                                        <option value="Interne">Interne</option>
+                                        <option value="Externe">Externe</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <div className="btn-container">

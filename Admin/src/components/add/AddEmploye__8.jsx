@@ -12,6 +12,7 @@ import todayUpdateFunction from '../function/TodayUpdate'
 import HeaderRight from '../includes/HeaderRight'
 
 import Spinner from '../Spinner'
+import ScrollToTop from '../ScrollToTop'
 //--------------------------import Table------------------------
 // Matriel-table
 import MaterialTable from 'material-table';
@@ -223,8 +224,9 @@ function AddEmploye__8() {
 
     const handleBtnDeleteRow = (e, row) => {
         console.log(row.ass_id)
-        const rec_id = row.ass_id
-        axios.post(`${process.env.REACT_APP_API}/table8/delete`, { rec_id }).then((response) => {
+        const rec_id = row.gra_id
+        const matricule = row.matricule
+        axios.post(`${process.env.REACT_APP_API}/table8/delete`, { matricule, rec_id }).then((response) => {
             console.log(response.data)
             setListen(!listen)
             window.alert(response.data)
@@ -240,6 +242,7 @@ function AddEmploye__8() {
 
     return (
         <>
+            <ScrollToTop />
             <div className="roww" ref={roww} >
                 <section className="coll-1" ref={coll__1}>
                     <NavAddEmploye current="Employe" />
@@ -262,16 +265,6 @@ function AddEmploye__8() {
                                     <span className="floating-label">Exercice ex: 2021/2022</span>
                                     <p>{errors.nom?.message}</p>
                                 </div>
-                                {/* <div className="user-input-wrp">
-                                    <br />
-                                    <input
-                                        type="text"
-                                        className="inputText"
-                                        {...register("nature")}
-                                        required
-                                    />
-                                    <span className="floating-label">Nature de l'aventage</span>
-                                </div> */}
                                 <div className="user-input-wrp" >
                                     <br />
                                     <select className="inputText"  {...register("nature")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
@@ -318,7 +311,7 @@ function AddEmploye__8() {
                                         {...register("duree")}
                                         required
                                     />
-                                    <span className="floating-label">Saisier La Durée en jours </span>
+                                    <span className="floating-label">Nombre de jours congé</span>
                                 </div>
                                 <div className="user-input-wrp">
                                     <br />
@@ -329,7 +322,7 @@ function AddEmploye__8() {
                                         {...register("duree_rest")}
                                         required
                                     />
-                                    <span className="floating-label">Le nombre de jours restant </span>
+                                    <span className="floating-label">Nombre de jours restant </span>
                                 </div>
                             </div>
                             <div className="btn-container">

@@ -41,6 +41,7 @@ router.post('/restore', (req, res) => {
 router.post('/delete', (req, res) => {
 
     const { emp_id } = req.body
+    console.log(emp_id)
 
     // Delete all data from table
     sql2 = `DELETE rgeneraux  FROM  WHERE rg_id='${emp_id}'`
@@ -57,17 +58,31 @@ router.post('/delete', (req, res) => {
 //------------------------------Delete from tables--------------------------------
 router.post('/table2/delete', (req, res) => {
 
-    const { rec_id } = req.body
+    const { matricule, rec_id } = req.body
 
-    // update data into table
-    sql = `DELETE FROM exprofessionnelle  WHERE exp_id='${rec_id}'`
-    con.query(sql, (err, del) => {
+    sql = `SELECT COUNT(*) as count from exprofessionnelle where matricule='${matricule}'`
+    con.query(sql, (err, select) => {
+        console.log(select[0].count)
         if (err) {
             console.log(err)
-            return res.status(402).send('Something went wrong !')
+            return res.status(400).send('Something went wrong !')
         }
-        res.send('Successfully Deleted !')
+        // if (select[0].count <= 1) {
+        //     return res.status(400).send('Can not delete it')
+        // } else {
+        // update data into table
+        sql = `DELETE FROM exprofessionnelle  WHERE exp_id='${rec_id}'`
+        con.query(sql, (err, del) => {
+            if (err) {
+                console.log(err)
+                return res.status(402).send('Something went wrong !')
+            }
+            res.send('Successfully Deleted !')
+        })
+
+        // }
     })
+
 
 })
 

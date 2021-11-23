@@ -97,6 +97,7 @@ function Employe() {
             cellStyle: { padding: '8px' }
         },
 
+
     ];
     // end Matriel-table
 
@@ -186,6 +187,7 @@ function Employe() {
 
     return (
         <>
+            <ScrollToTop />
             <Model emp_id={emp_id} listen={listen} setListen={setListen} />
             <div className="roww" ref={roww} >
                 <section className="coll-1" ref={coll__1}>
@@ -209,7 +211,8 @@ function Employe() {
                                     headerStyle: { background: '#222D32', color: '#fff', fontSize: '16px', padding: '12px 8px', },
                                     rowStyle: (data, index) => index % 2 == 1 ? { background: '#dddddd', fontSize: '15px', } : { fontSize: '15px' },
                                     searchFieldStyle: { border: '1px solid #dddddd', padding: '5px 0px 5px 10px', borderRadius: '5px', marginRight: '8px' },
-                                    actionsColumnIndex: -1
+                                    actionsColumnIndex: -1,
+                                    // filtering: true
                                 }}
 
                                 actions={[

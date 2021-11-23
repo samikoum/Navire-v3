@@ -33,8 +33,8 @@ function UpdateEmploye__8() {
             const tab = response.data.table8[0]
             setdesignation(tab['designation'])
             setnature(tab['nature'])
-            setdate(tab['date'])
-            setdate_retour(tab['date_retour'])
+            setdate(todayUpdateFunction(tab['date']))
+            setdate_retour(todayUpdateFunction(tab['date_retour']))
             setduree(tab['duree'])
             setduree_rest(tab['duree_rest'])
         }).catch((error) => {
@@ -84,10 +84,6 @@ function UpdateEmploye__8() {
         // reset()
     }
 
-    // Date
-    const todayDate = todayUpdateFunction(date)
-    const todayDate_Retour = todayUpdateFunction(date_retour)
-
     return (
         <>
             <div className="roww" ref={roww} >
@@ -108,26 +104,14 @@ function UpdateEmploye__8() {
                                         required
                                         onChange={(e) => setdesignation(e.target.value)}
                                         value={designation}
-
                                     />
                                     <span className="floating-label">Exercice ex: 2021/2022</span>
                                     <p>{errors.nom?.message}</p>
                                 </div>
-                                {/* <div className="user-input-wrp">
-                                    <br />
-                                    <input
-                                        type="text"
-                                        className="inputText"
-                                        required
-                                        onChange={(e) => setnature(e.target.value)}
-                                        value={nature}
-                                    />
-                                    <span className="floating-label">Nature du congé</span>
-                                </div> */}
                                 <div className="user-input-wrp">
                                     <br />
                                     <select className="inputText" onChange={(e) => setnature(e.target.value)} value={nature} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
-                                        {/* <option selected disabled value={sexe}>{sexe}</option> */}
+                                        <option selected disabled value="">Nature du congé</option>
                                         <option value="reliquat">reliquat</option>
                                         <option value="annuel">annuel</option>
                                     </select>
@@ -142,7 +126,7 @@ function UpdateEmploye__8() {
                                         className="inputText"
                                         required
                                         onChange={(e) => setdate(e.target.value)}
-                                        value={todayDate}
+                                        value={date}
                                     />
                                     <span className="floating-label label-date">Date de départ</span>
                                 </div>
@@ -153,7 +137,7 @@ function UpdateEmploye__8() {
                                         className="inputText"
                                         required
                                         onChange={(e) => setdate_retour(e.target.value)}
-                                        value={todayDate_Retour}
+                                        value={date_retour}
                                     />
                                     <span className="floating-label label-date">Date de retour</span>
                                 </div>
@@ -170,7 +154,7 @@ function UpdateEmploye__8() {
                                         onChange={(e) => setduree(e.target.value)}
                                         value={duree}
                                     />
-                                    <span className="floating-label">Saisier La Durée en jours </span>
+                                    <span className="floating-label">Nombre de jours congé</span>
                                 </div>
                                 <div className="user-input-wrp">
                                     <br />
@@ -182,7 +166,7 @@ function UpdateEmploye__8() {
                                         onChange={(e) => setduree_rest(e.target.value)}
                                         value={duree_rest}
                                     />
-                                    <span className="floating-label">Le nombre de jours restant </span>
+                                    <span className="floating-label">Nombre de jours restant </span>
                                 </div>
                             </div>
 

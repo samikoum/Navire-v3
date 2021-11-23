@@ -18,6 +18,7 @@ function UpdateEmploye__4() {
     const [intitule, setintitule] = useState('')
     const [organisme, setorganisme] = useState('')
     const [date, setdate] = useState('')
+    const [date_fin, setdate_fin] = useState('')
     const [duree, setduree] = useState('')
     const [titre, settitre] = useState('')
 
@@ -32,9 +33,10 @@ function UpdateEmploye__4() {
             const tab = response.data.table4[0]
             setintitule(tab['intitule'])
             setorganisme(tab['organisme'])
-            setdate(tab['date'])
+            setdate(todayUpdateFunction(tab['date']))
             setduree(tab['duree'])
             settitre(tab['titre'])
+            setdate_fin(todayUpdateFunction(tab['date_fin']))
         }).catch((error) => {
             console.log(error)
         })
@@ -64,7 +66,7 @@ function UpdateEmploye__4() {
     // Form Submit 
     const submitForm = () => {
         const data = {
-            intitule, organisme, date, duree, titre
+            intitule, organisme, date, date_fin, duree, titre
         }
         setLoader(true)
         axios.post(`${process.env.REACT_APP_API}/edit_4`, { data, id: { id } }).then((response) => {
@@ -81,9 +83,6 @@ function UpdateEmploye__4() {
         })
         // reset()
     }
-
-    // Date
-    const todayDate = todayUpdateFunction(date)
 
     return (
         <>
@@ -107,7 +106,7 @@ function UpdateEmploye__4() {
                                         value={intitule}
 
                                     />
-                                    <span className="floating-label">Post Occupé</span>
+                                    <span className="floating-label">Thème de la Formation</span>
                                     <p>{errors.nom?.message}</p>
                                 </div>
                                 <div className="user-input-wrp">
@@ -119,7 +118,7 @@ function UpdateEmploye__4() {
                                         onChange={(e) => setorganisme(e.target.value)}
                                         value={organisme}
                                     />
-                                    <span className="floating-label">organisme</span>
+                                    <span className="floating-label">Organisme Formateur</span>
                                 </div>
                             </div>
 
@@ -131,23 +130,36 @@ function UpdateEmploye__4() {
                                         className="inputText"
                                         required
                                         onChange={(e) => setdate(e.target.value)}
-                                        value={todayDate}
+                                        value={date}
                                     />
+                                    <span className="floating-label label-date">du</span>
                                 </div>
                                 <div className="user-input-wrp">
                                     <br />
                                     <input
-                                        type="number"
-                                        min="0"
+                                        type="date"
                                         className="inputText"
                                         required
-                                        onChange={(e) => setduree(e.target.value)}
-                                        value={duree}
+                                        onChange={(e) => setdate_fin(e.target.value)}
+                                        value={date_fin}
                                     />
-                                    <span className="floating-label">Saisier La Durée en mois</span>
+                                    <span className="floating-label label-date">au</span>
                                 </div>
+
                             </div>
 
+                            <div className="user-input-wrp">
+                                <br />
+                                <input
+                                    type="number"
+                                    min="0"
+                                    className="inputText"
+                                    required
+                                    onChange={(e) => setduree(e.target.value)}
+                                    value={duree}
+                                />
+                                <span className="floating-label">Saisier La Durée en mois</span>
+                            </div>
                             <div className="user-input-wrp">
                                 <br />
                                 <input

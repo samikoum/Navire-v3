@@ -20,6 +20,7 @@ function UpdateEmploye__7() {
     const [date_fin, setdate_fin] = useState('')
     const [conge, setconge] = useState('')
 
+    const [absence_num, setabsence_num] = useState('')
     const history = useHistory()
 
     const { id } = useParams()
@@ -30,9 +31,10 @@ function UpdateEmploye__7() {
             console.log(response.data.table7)
             const tab = response.data.table7[0]
             setabsence_irr(tab['absence_irr'])
-            setdate(tab['annee'])
-            setdate_fin(tab['date_fin'])
+            setdate(todayUpdateFunction(tab['annee']))
+            setdate_fin(todayUpdateFunction(tab['date_fin']))
             setconge(tab['conge'])
+            setabsence_num(tab['absence_num'])
         }).catch((error) => {
             console.log(error)
         })
@@ -62,7 +64,7 @@ function UpdateEmploye__7() {
     // Form Submit 
     const submitForm = () => {
         const data = {
-            absence_irr, date, date_fin, conge
+            absence_irr, date, date_fin, conge, absence_num
         }
         setLoader(true)
         axios.post(`${process.env.REACT_APP_API}/edit_7`, { data, id: { id } }).then((response) => {
@@ -80,10 +82,6 @@ function UpdateEmploye__7() {
         // reset()
     }
 
-    // Date
-    const todayDate = todayUpdateFunction(date)
-    const todayDate_Fin = todayUpdateFunction(date_fin)
-
     return (
         <>
             <div className="roww" ref={roww} >
@@ -95,14 +93,29 @@ function UpdateEmploye__7() {
                     <div className="coll-2-container" >
                         <form onSubmit={handleSubmit(submitForm)}>
 
-                            <div className="user-input-wrp">
-                                <br />
-                                <select className="inputText" onChange={(e) => setabsence_irr(e.target.value)} value={absence_irr} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
-                                    {/* <option selected disabled value={sexe}>{sexe}</option> */}
-                                    <option value="autorisé">autorisé</option>
-                                    <option value="irrégulière">irrégulière</option>
-                                </select>
+                            <div className="two-input">
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <select className="inputText" onChange={(e) => setabsence_irr(e.target.value)} value={absence_irr} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
+                                        <option selected disabled value="">Type d'absence</option>
+                                        <option value="autorisé">autorisé</option>
+                                        <option value="irrégulière">irrégulière</option>
+                                    </select>
+                                </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="number"
+                                        className="inputText"
+
+                                        onChange={(e) => setabsence_num(e.target.value)}
+                                        value={absence_num}
+                                        required
+                                    />
+                                    <span className="floating-label">Nombre d'absence</span>
+                                </div>
                             </div>
+
 
                             <div className="two-input">
                                 <div className="user-input-wrp">
@@ -112,8 +125,9 @@ function UpdateEmploye__7() {
                                         className="inputText"
                                         required
                                         onChange={(e) => setdate(e.target.value)}
-                                        value={todayDate}
+                                        value={date}
                                     />
+                                    <span className="floating-label label-date">Du</span>
                                 </div>
                                 <div className="user-input-wrp">
                                     <br />
@@ -122,26 +136,17 @@ function UpdateEmploye__7() {
                                         className="inputText"
                                         required
                                         onChange={(e) => setdate_fin(e.target.value)}
-                                        value={todayDate_Fin}
+                                        value={date_fin}
                                     />
+                                    <span className="floating-label label-date">Au</span>
                                 </div>
 
                             </div>
-                            {/* <div className="user-input-wrp">
-                                <br />
-                                <input
-                                    type="number"
-                                    className="inputText"
-                                    required
-                                    onChange={(e) => setconge(e.target.value)}
-                                    value={conge}
-                                />
-                                <span className="floating-label">Motif d'absence</span>
-                            </div> */}
+
                             <div className="user-input-wrp">
                                 <br />
                                 <select className="inputText" onChange={(e) => setconge(e.target.value)} value={conge} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
-                                    {/* <option selected disabled value={sexe}>{sexe}</option> */}
+                                    <option selected disabled value="">Motif d'absence</option>
                                     <option value="maladie">maladie</option>
                                     <option value="maternité">maternité</option>
                                     <option value="accident du travail">accident du travail</option>

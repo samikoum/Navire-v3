@@ -11,6 +11,7 @@ import NavAddEmploye from '../navBar/NavAddEmploye'
 import todayUpdateFunction from '../function/TodayUpdate'
 import HeaderRight from '../includes/HeaderRight'
 import Spinner from '../Spinner'
+import ScrollToTop from '../ScrollToTop'
 //--------------------------import Table------------------------
 // Matriel-table
 import MaterialTable from 'material-table';
@@ -206,7 +207,8 @@ function AddEmploye__4() {
     const handleBtnDeleteRow = (e, row) => {
         console.log(row.ass_id)
         const rec_id = row.for_id
-        axios.post(`${process.env.REACT_APP_API}/table4/delete`, { rec_id }).then((response) => {
+        const matricule = row.matricule
+        axios.post(`${process.env.REACT_APP_API}/table4/delete`, { matricule, rec_id }).then((response) => {
             console.log(response.data)
             setListen(!listen)
             window.alert(response.data)
@@ -223,6 +225,7 @@ function AddEmploye__4() {
 
     return (
         <>
+            <ScrollToTop />
             <div className="roww" ref={roww} >
                 <section className="coll-1" ref={coll__1}>
                     <NavAddEmploye current="Employe" />
@@ -242,7 +245,7 @@ function AddEmploye__4() {
                                         {...register("intitule")}
                                         required
                                     />
-                                    <span className="floating-label">Intitulé de la Formation</span>
+                                    <span className="floating-label">Thème de la Formation</span>
                                     <p>{errors.nom?.message}</p>
                                 </div>
                                 <div className="user-input-wrp">
@@ -266,32 +269,49 @@ function AddEmploye__4() {
                                         {...register("date")}
                                         required
                                     />
-                                    <span className="floating-label"></span>
+                                    <span className="floating-label label-date">du</span>
                                 </div>
                                 <div className="user-input-wrp">
                                     <br />
                                     <input
-                                        type="text"
+                                        type="date"
                                         className="inputText"
-                                        {...register("duree")}
+                                        {...register("date_fin")}
                                         required
                                     />
-                                    <span className="floating-label">Saisier La Durée en mois</span>
-                                    <p>{errors.nom?.message}</p>
+                                    <span className="floating-label label-date">au</span>
                                 </div>
+
                             </div>
 
                             <div className="user-input-wrp">
                                 <br />
                                 <input
-                                    type="text"
+                                    type="number"
+                                    min="0"
                                     className="inputText"
-                                    {...register("titre")}
+                                    {...register("duree")}
                                     required
                                 />
-                                <span className="floating-label">Titre Obtenu</span>
+                                <span className="floating-label">Saisier La Durée en mois</span>
+                                <p>{errors.nom?.message}</p>
                             </div>
 
+                            <div className="user-input-wrp" >
+                                <br />
+                                <select className="inputText"  {...register("titre")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
+                                    <option selected disabled value="">Diplôme Obtenu</option>
+                                    <option value="Attestation de participation">Attestation de participation</option>
+                                    <option value="Master professionnel">Master professionnel</option>
+                                    <option value="FALD">FALD</option>
+                                    <option value="MBA">MBA</option>
+                                    <option value="CFPA">CFPA</option>
+                                    <option value="Homologation">Homologation</option>
+                                    <option value="CND">CND</option>
+                                    <option value="Habilitation">Habilitation</option>
+                                    <option value="Autres">Autres</option>
+                                </select>
+                            </div>
 
                             <div className="btn-container">
                                 {loader ?

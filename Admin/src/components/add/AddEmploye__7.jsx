@@ -11,6 +11,7 @@ import NavAddEmploye from '../navBar/NavAddEmploye'
 import todayUpdateFunction from '../function/TodayUpdate'
 import HeaderRight from '../includes/HeaderRight'
 import Spinner from '../Spinner'
+import ScrollToTop from '../ScrollToTop'
 //--------------------------import Table------------------------
 // Matriel-table
 import MaterialTable from 'material-table';
@@ -199,7 +200,8 @@ function AddEmploye__7() {
     const handleBtnDeleteRow = (e, row) => {
         console.log(row.ass_id)
         const rec_id = row.ass_id
-        axios.post(`${process.env.REACT_APP_API}/table7/delete`, { rec_id }).then((response) => {
+        const matricule = row.matricule
+        axios.post(`${process.env.REACT_APP_API}/table7/delete`, { matricule, rec_id }).then((response) => {
             console.log(response.data)
             setListen(!listen)
             window.alert(response.data)
@@ -216,6 +218,7 @@ function AddEmploye__7() {
 
     return (
         <>
+            <ScrollToTop />
             <div className="roww" ref={roww} >
                 <section className="coll-1" ref={coll__1}>
                     <NavAddEmploye current="Employe" />
@@ -226,15 +229,26 @@ function AddEmploye__7() {
                         <ProgressBar />
                         <form onSubmit={handleSubmit(submitForm)} style={{ margin: '0 auto' }}>
 
-                            <div className="user-input-wrp" >
-                                <br />
-                                <select className="inputText"  {...register("absence_irr")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
-                                    <option selected disabled value="">Type d'abscence</option>
-                                    <option value="autorisé">autorisé</option>
-                                    <option value="irrégulière">irrégulière</option>
-                                </select>
+                            <div className="two-input">
+                                <div className="user-input-wrp" >
+                                    <br />
+                                    <select className="inputText"  {...register("absence_irr")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
+                                        <option selected disabled value="">Type d'absence</option>
+                                        <option value="autorisé">autorisé</option>
+                                        <option value="irrégulière">irrégulière</option>
+                                    </select>
+                                </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="number"
+                                        className="inputText"
+                                        {...register("absence_num")}
+                                        required
+                                    />
+                                    <span className="floating-label">Nombre d'absence</span>
+                                </div>
                             </div>
-
                             <div className="two-input">
                                 <div className="user-input-wrp">
                                     <br />
@@ -327,7 +341,6 @@ function AddEmploye__7() {
                         </div>
 
                         {/*-----------------End Table------------------------*/}
-
 
                     </div>
                 </section>

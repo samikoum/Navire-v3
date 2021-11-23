@@ -21,6 +21,10 @@ function UpdateEmploye__6() {
     const [griefs, setgriefs] = useState('')
     const [degree, setdegree] = useState('')
 
+    const [classification, setclassification] = useState('')
+    const [salaire, setsalaire] = useState('')
+    const [duree, setduree] = useState('')
+    const [date_licen, setdate_licen] = useState('')
     const history = useHistory()
 
     const { id } = useParams()
@@ -32,9 +36,14 @@ function UpdateEmploye__6() {
             const tab = response.data.table6[0]
             setdesignation(tab['designation'])
             setauteur(tab['auteur'])
-            setdate(tab['date'])
+            setdate(todayUpdateFunction(tab['date']))
             setgriefs(tab['griefs'])
             setdegree(tab['degree'])
+
+            setclassification(tab['classification'])
+            setsalaire(tab['salaire'])
+            setduree(tab['duree'])
+            setdate_licen(todayUpdateFunction(tab['date_licen']))
         }).catch((error) => {
             console.log(error)
         })
@@ -64,7 +73,7 @@ function UpdateEmploye__6() {
     // Form Submit 
     const submitForm = () => {
         const data = {
-            designation, auteur, date, griefs, degree
+            designation, auteur, date, griefs, degree, classification, salaire, duree, date_licen
         }
         setLoader(true)
         axios.post(`${process.env.REACT_APP_API}/edit_6`, { data, id: { id } }).then((response) => {
@@ -81,9 +90,6 @@ function UpdateEmploye__6() {
         })
         // reset()
     }
-
-    // Date
-    const todayDate = todayUpdateFunction(date)
 
     return (
         <>
@@ -107,7 +113,7 @@ function UpdateEmploye__6() {
                                         value={designation}
 
                                     />
-                                    <span className="floating-label">Désignation de la sanction</span>
+                                    <span className="floating-label">Nouveau Post</span>
                                     <p>{errors.nom?.message}</p>
                                 </div>
                                 <div className="user-input-wrp">
@@ -119,7 +125,7 @@ function UpdateEmploye__6() {
                                         onChange={(e) => setauteur(e.target.value)}
                                         value={auteur}
                                     />
-                                    <span className="floating-label">Auteur de la sanction</span>
+                                    <span className="floating-label">Nature de la sanction</span>
                                 </div>
                             </div>
 
@@ -131,8 +137,9 @@ function UpdateEmploye__6() {
                                         className="inputText"
                                         required
                                         onChange={(e) => setdate(e.target.value)}
-                                        value={todayDate}
+                                        value={date}
                                     />
+                                    <span className="floating-label label-date">Date effet</span>
                                 </div>
                                 <div className="user-input-wrp">
                                     <br />
@@ -155,7 +162,60 @@ function UpdateEmploye__6() {
                                     onChange={(e) => setdegree(e.target.value)}
                                     value={degree}
                                 />
-                                <span className="floating-label">Motif de la sanction </span>
+                                <span className="floating-label">Degré de la sanction </span>
+                            </div>
+
+                            <div className="two-input">
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="text"
+                                        className="inputText"
+                                        onChange={(e) => setclassification(e.target.value)}
+                                        value={classification}
+                                        required
+                                    />
+                                    <span className="floating-label">Nouveau classification</span>
+                                    <p>{errors.nom?.message}</p>
+                                </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="number"
+                                        className="inputText"
+                                        onChange={(e) => setsalaire(e.target.value)}
+                                        value={salaire}
+                                        required
+                                    />
+                                    <span className="floating-label">Nouveau Salaire de base</span>
+                                </div>
+                            </div>
+
+                            <div className="two-input">
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="inputText"
+                                        onChange={(e) => setduree(e.target.value)}
+                                        value={duree}
+                                        required
+                                    />
+                                    <span className="floating-label">Durée retard échelon (par nombre de mois)</span>
+                                    <p>{errors.nom?.message}</p>
+                                </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="date"
+                                        className="inputText"
+                                        onChange={(e) => setdate_licen(e.target.value)}
+                                        value={date_licen}
+                                        required
+                                    />
+                                    <span className="floating-label label-date">Date de licenciment</span>
+                                </div>
                             </div>
 
                             <div className="btn-container">

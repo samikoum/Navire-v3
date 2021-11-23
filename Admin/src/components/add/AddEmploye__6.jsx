@@ -11,6 +11,7 @@ import NavAddEmploye from '../navBar/NavAddEmploye'
 import todayUpdateFunction from '../function/TodayUpdate'
 import HeaderRight from '../includes/HeaderRight'
 import Spinner from '../Spinner'
+import ScrollToTop from '../ScrollToTop'
 //--------------------------import Table------------------------
 // Matriel-table
 import MaterialTable from 'material-table';
@@ -184,6 +185,10 @@ function AddEmploye__6() {
         formData.append("date", data.date);
         formData.append("griefs", data.griefs);
         formData.append("degree", data.degree);
+        formData.append("classification", data.classification);
+        formData.append("salaire", data.salaire);
+        formData.append("duree", data.duree);
+        formData.append("date_licen", data.date_licen);
         setLoader(true)
         axios.post(`${process.env.REACT_APP_API}/add_6`, formData).then((response) => {
             // console.log(response.data)
@@ -224,8 +229,9 @@ function AddEmploye__6() {
 
     const handleBtnDeleteRow = (e, row) => {
         console.log(row.ass_id)
-        const rec_id = row.ass_id
-        axios.post(`${process.env.REACT_APP_API}/table6/delete`, { rec_id }).then((response) => {
+        const rec_id = row.mes_id
+        const matricule = row.matricule
+        axios.post(`${process.env.REACT_APP_API}/table6/delete`, { matricule, rec_id }).then((response) => {
             console.log(response.data)
             setListen(!listen)
             window.alert(response.data)
@@ -242,6 +248,7 @@ function AddEmploye__6() {
 
     return (
         <>
+            <ScrollToTop />
             <div className="roww" ref={roww} >
                 <section className="coll-1" ref={coll__1}>
                     <NavAddEmploye current="Employe" />
@@ -261,7 +268,7 @@ function AddEmploye__6() {
                                         {...register("designation")}
                                         required
                                     />
-                                    <span className="floating-label">Désignation de la sanction</span>
+                                    <span className="floating-label">Nouveau Post</span>
                                     <p>{errors.nom?.message}</p>
                                 </div>
                                 <div className="user-input-wrp">
@@ -272,7 +279,7 @@ function AddEmploye__6() {
                                         {...register("auteur")}
                                         required
                                     />
-                                    <span className="floating-label">Auteur de la sanction</span>
+                                    <span className="floating-label">Nature de la sanction</span>
                                 </div>
                             </div>
 
@@ -308,6 +315,55 @@ function AddEmploye__6() {
                                     required
                                 />
                                 <span className="floating-label">Degré de la sanction </span>
+                            </div>
+
+                            <div className="two-input">
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="text"
+                                        className="inputText"
+                                        {...register("classification")}
+                                        required
+                                    />
+                                    <span className="floating-label">Nouveau classification</span>
+                                    <p>{errors.nom?.message}</p>
+                                </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="number"
+                                        className="inputText"
+                                        {...register("salaire")}
+                                        required
+                                    />
+                                    <span className="floating-label">Nouveau Salaire de base</span>
+                                </div>
+                            </div>
+
+                            <div className="two-input">
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="inputText"
+                                        {...register("duree")}
+                                        required
+                                    />
+                                    <span className="floating-label">Durée retard échelon (par nombre de mois)</span>
+                                    <p>{errors.nom?.message}</p>
+                                </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="date"
+                                        className="inputText"
+                                        {...register("date_licen")}
+                                        required
+                                    />
+                                    <span className="floating-label label-date">Date de licenciment</span>
+                                </div>
                             </div>
 
                             <input

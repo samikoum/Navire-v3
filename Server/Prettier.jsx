@@ -8,3 +8,13 @@
                         Add New Employe
                     </div>
                 </Link> */}
+{/* <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="text"
+                                        className="inputText"
+                                        {...register("ascendant")}
+                                        required
+                                    />
+                                    <span className="floating-label">Ascendant a charge</span>
+     </div> */}

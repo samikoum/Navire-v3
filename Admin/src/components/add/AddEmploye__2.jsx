@@ -11,6 +11,7 @@ import NavAddEmploye from '../navBar/NavAddEmploye'
 import todayUpdateFunction from '../function/TodayUpdate'
 import HeaderRight from '../includes/HeaderRight'
 import Spinner from '../Spinner'
+import ScrollToTop from '../ScrollToTop'
 //--------------------------import Table------------------------
 // Matriel-table
 import MaterialTable from 'material-table';
@@ -199,7 +200,8 @@ function AddEmploye__2() {
     const handleBtnDeleteRow = (e, row) => {
         console.log(row.ass_id)
         const rec_id = row.exp_id
-        axios.post(`${process.env.REACT_APP_API}/table2/delete`, { rec_id }).then((response) => {
+        const matricule = row.matricule
+        axios.post(`${process.env.REACT_APP_API}/table2/delete`, { matricule, rec_id }).then((response) => {
             console.log(response.data)
             setListen(!listen)
             window.alert(response.data)
@@ -213,8 +215,18 @@ function AddEmploye__2() {
 
     }
 
+    var row__1 = []
+    var row__2 = []
+    for (let i = 1; i <= 22; i++) {
+        row__1.push(i)
+    }
+    for (let i = 1; i <= 20; i++) {
+        row__2.push(i)
+    }
+
     return (
         <>
+            <ScrollToTop />
             <div className="roww" ref={roww} >
                 <section className="coll-1" ref={coll__1}>
                     <NavAddEmploye current="Employe" />
@@ -234,20 +246,20 @@ function AddEmploye__2() {
                                         {...register("post")}
                                         required
                                     />
-                                    <span className="floating-label">Post Occupé</span>
+                                    <span className="floating-label">Fonction</span>
                                     <p>{errors.nom?.message}</p>
                                 </div>
                                 <div className="user-input-wrp">
                                     <br />
                                     <select className="inputText"  {...register("employer")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
                                         <option selected disabled value="">Structure</option>
-                                        <option value="Structure__1">Structure__1</option>
-                                        <option value="Structure__2">Structure__2</option>
-                                        <option value="Structure__3">Structure__3</option>
+                                        <option value="Cadre">Cadre</option>
+                                        <option value="Maitrise">Maitrise</option>
+                                        <option value="Exécution">Exécution</option>
+                                        <option value="Autres">Autres</option>
                                     </select>
                                 </div>
                             </div>
-
 
                             <div className="two-input">
                                 <div className="user-input-wrp">
@@ -272,15 +284,115 @@ function AddEmploye__2() {
                                     <span className="floating-label label-date">Date de fin</span>
                                 </div>
                             </div>
-                            <div className="user-input-wrp" >
-                                <br />
-                                <select className="inputText"  {...register("contrat")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
-                                    <option selected disabled value="">Type de Contrat</option>
-                                    <option value="cdi">cdi</option>
-                                    <option value="cdd">cdd</option>
-                                    <option value="stagiare">stagiare</option>
-                                </select>
+
+                            <div className="two-input">
+                                <div className="user-input-wrp" >
+                                    <br />
+                                    <select className="inputText"  {...register("contrat")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
+                                        <option selected disabled value="">Type de Contrat</option>
+                                        <option value="cdi">cdi</option>
+                                        <option value="cdd">cdd</option>
+                                        <option value="stagiare">stagiare</option>
+                                        <option value="autres">autres</option>
+                                    </select>
+                                </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="text"
+                                        className="inputText"
+                                        {...register("num_contrat")}
+                                        required
+                                    />
+                                    <span className="floating-label">Numéro du contrat</span>
+                                    <p>{errors.nom?.message}</p>
+                                </div>
                             </div>
+
+                            <div className="two-input">
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="date"
+                                        className="inputText"
+                                        {...register("date_depart")}
+                                        required
+                                    />
+                                    <span className="floating-label label-date">Date de départ</span>
+                                    <p>{errors.nom?.message}</p>
+                                </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="date"
+                                        className="inputText"
+                                        {...register("date_reprise")}
+                                        required
+                                    />
+                                    <span className="floating-label label-date">Date de reprise</span>
+                                    <p>{errors.nom?.message}</p>
+                                </div>
+
+                            </div>
+                            <div className="two-input">
+                                <div className="user-input-wrp" >
+                                    <br />
+                                    <select className="inputText"  {...register("motif")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
+                                        <option selected disabled value="">Motif du Départ</option>
+                                        <option value="Fin de contrat">Fin de contrat</option>
+                                        <option value="Démission">Démission</option>
+                                        <option value="Maladie">Maladie</option>
+                                        <option value="Retraite">Retraite</option>
+                                        <option value="Mise en Disponibilité">Mise en Disponibilité</option>
+                                        <option value="Autres">Autres</option>
+                                    </select>
+                                </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="text"
+                                        className="inputText"
+                                        {...register("decision")}
+                                        required
+                                    />
+                                    <span className="floating-label">Décision</span>
+                                    <p>{errors.nom?.message}</p>
+                                </div>
+                            </div>
+
+                            <div className="two-input">
+                                <div className="user-input-wrp" >
+                                    <br />
+                                    <select className="inputText"  {...register("classe")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
+                                        <option selected disabled value="">Classe</option>
+                                        {row__1.map((classe, key) => {
+                                            return <option value={`${classe}`} key={key}>{classe <= 9 ? 0 + '' + classe : classe}</option>
+                                        })}
+                                    </select>
+                                </div>
+                                <div className="user-input-wrp" >
+                                    <br />
+                                    <select className="inputText"  {...register("qualification")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
+                                        <option selected disabled value="">Qualification</option>
+                                        {row__2.map((qualification, key) => {
+                                            return <option value={`${qualification}`} key={key}>{qualification <= 9 ? 0 + '' + qualification : qualification}</option>
+                                        })}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="user-input-wrp">
+                                <br />
+                                <input
+                                    type="number"
+                                    className="inputText"
+                                    {...register("salaire")}
+                                    required
+                                />
+                                <span className="floating-label">Salaire de base</span>
+                                <p>{errors.nom?.message}</p>
+                            </div>
+
 
                             <div className="btn-container">
                                 {loader ?

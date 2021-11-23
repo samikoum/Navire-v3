@@ -21,6 +21,9 @@ function UpdateEmploye__5() {
     const [gain, setgain] = useState('')
     const [motif, setmotif] = useState('')
 
+    const [decision, setdecision] = useState('')
+    const [primes, setprimes] = useState('')
+
     const history = useHistory()
 
     const { id } = useParams()
@@ -32,9 +35,14 @@ function UpdateEmploye__5() {
             const tab = response.data.table5[0]
             setsalaire_ini(tab['salaire_initial'])
             setsalaire_reval(tab['salaire_rev'])
-            setdate(tab['date'])
+            setdate(todayUpdateFunction(tab['date']))
             setgain(tab['gain'])
             setmotif(tab['motif'])
+
+            setdecision(tab['decision'])
+            setprimes(tab['primes'])
+
+
         }).catch((error) => {
             console.log(error)
         })
@@ -65,7 +73,7 @@ function UpdateEmploye__5() {
     // Form Submit 
     const submitForm = () => {
         const data = {
-            salaire_ini, salaire_reval, date, gain, motif
+            salaire_ini, salaire_reval, date, gain, motif, decision, primes
         }
         setLoader(true)
         axios.post(`${process.env.REACT_APP_API}/edit_5`, { data, id: { id } }).then((response) => {
@@ -107,7 +115,7 @@ function UpdateEmploye__5() {
                                         value={salaire_ini}
 
                                     />
-                                    <span className="floating-label">Salaire Initial</span>
+                                    <span className="floating-label">Salaire de base</span>
                                     <p>{errors.nom?.message}</p>
                                 </div>
                                 <div className="user-input-wrp">
@@ -119,7 +127,7 @@ function UpdateEmploye__5() {
                                         onChange={(e) => setsalaire_reval(e.target.value)}
                                         value={salaire_reval}
                                     />
-                                    <span className="floating-label">Salaire Revalorisé</span>
+                                    <span className="floating-label">Nouveau Salaire de base</span>
                                 </div>
                             </div>
 
@@ -131,9 +139,25 @@ function UpdateEmploye__5() {
                                         className="inputText"
                                         required
                                         onChange={(e) => setdate(e.target.value)}
-                                        value={todayDate}
+                                        value={date}
                                     />
+                                    <span className="floating-label label-date">Date de décision</span>
                                 </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="text"
+                                        className="inputText"
+                                        onChange={(e) => setdecision(e.target.value)}
+                                        value={decision}
+                                        required
+                                    />
+                                    <span className="floating-label">Décision / contrat</span>
+                                    <p>{errors.nom?.message}</p>
+                                </div>
+                            </div>
+
+                            <div className="two-input">
                                 <div className="user-input-wrp">
                                     <br />
                                     <input
@@ -143,30 +167,35 @@ function UpdateEmploye__5() {
                                         onChange={(e) => setgain(e.target.value)}
                                         value={gain}
                                     />
-                                    <span className="floating-label">Saisier Le gains</span>
+                                    <span className="floating-label">Ecart</span>
+                                </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <select className="inputText" onChange={(e) => setmotif(e.target.value)} value={motif} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
+                                        <option selected disabled value="">Saisier Le motif</option>
+                                        <option value="Promotion">Promotion</option>
+                                        <option value="Avancement">Avancement</option>
+                                        <option value="Rétrogradation">Rétrogradation</option>
+                                        <option value="Réorganisation">Réorganisation</option>
+                                        <option value="Autres">Autres</option>
+                                    </select>
                                 </div>
                             </div>
-
-                            {/* <div className="user-input-wrp">
-                                <br />
-                                <input
-                                    type="text"
-                                    className="inputText"
-                                    required
-                                    onChange={(e) => setmotif(e.target.value)}
-                                    value={motif}
-                                />
-                                <span className="floating-label">Saisier Le motif</span>
-                            </div> */}
                             <div className="user-input-wrp">
                                 <br />
-                                <select className="inputText" onChange={(e) => setmotif(e.target.value)} value={motif} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
-                                    {/* <option selected disabled value={sexe}>{sexe}</option> */}
-                                    <option value="Avancement">Avancement</option>
-                                    <option value="Promotion">Promotion</option>
-                                    <option value="Autre">Autre</option>
-                                </select>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    className="inputText"
+
+                                    onChange={(e) => setprimes(e.target.value)}
+                                    value={primes}
+                                    required
+                                />
+                                <span className="floating-label">Primes et intemnité</span>
+                                <p>{errors.nom?.message}</p>
                             </div>
+
 
                             <div className="btn-container">
                                 {loader ?

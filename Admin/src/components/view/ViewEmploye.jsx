@@ -211,9 +211,9 @@ function ViewEmploye() {
                                     <thead>
                                         <tr>
                                             <th>Matricule</th>
-                                            <th>Post Occupé</th>
+                                            <th>Fonction</th>
                                             <th>Structure</th>
-                                            <th>date début</th>
+                                            <th>Date de recrutememnt</th>
                                             <th>date fin</th>
                                             <th>Contrat</th>
                                         </tr>

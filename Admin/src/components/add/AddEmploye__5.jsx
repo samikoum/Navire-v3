@@ -11,6 +11,7 @@ import NavAddEmploye from '../navBar/NavAddEmploye'
 import todayUpdateFunction from '../function/TodayUpdate'
 import HeaderRight from '../includes/HeaderRight'
 import Spinner from '../Spinner'
+import ScrollToTop from '../ScrollToTop'
 //--------------------------import Table------------------------
 // Matriel-table
 import MaterialTable from 'material-table';
@@ -204,8 +205,9 @@ function AddEmploye__5() {
 
     const handleBtnDeleteRow = (e, row) => {
         console.log(row.ass_id)
-        const rec_id = row.ass_id
-        axios.post(`${process.env.REACT_APP_API}/table5/delete`, { rec_id }).then((response) => {
+        const rec_id = row.rev_id
+        const matricule = row.matricule
+        axios.post(`${process.env.REACT_APP_API}/table5/delete`, { matricule, rec_id }).then((response) => {
             console.log(response.data)
             setListen(!listen)
             window.alert(response.data)
@@ -221,6 +223,7 @@ function AddEmploye__5() {
 
     return (
         <>
+            <ScrollToTop />
             <div className="roww" ref={roww} >
                 <section className="coll-1" ref={coll__1}>
                     <NavAddEmploye current="Employe" />
@@ -230,7 +233,6 @@ function AddEmploye__5() {
                     <div className="coll-2-container" >
                         <ProgressBar />
                         <form onSubmit={handleSubmit(submitForm)} style={{ margin: '0 auto' }}>
-
                             <div className="two-input">
                                 <div className="user-input-wrp">
                                     <br />
@@ -240,7 +242,7 @@ function AddEmploye__5() {
                                         {...register("salaire_ini")}
                                         required
                                     />
-                                    <span className="floating-label">Salaire Initial</span>
+                                    <span className="floating-label">Salaire de base</span>
                                     <p>{errors.nom?.message}</p>
                                 </div>
                                 <div className="user-input-wrp">
@@ -251,7 +253,7 @@ function AddEmploye__5() {
                                         {...register("salaire_reval")}
                                         required
                                     />
-                                    <span className="floating-label">Salaire Revalorisé</span>
+                                    <span className="floating-label">Nouveau Salaire de base</span>
                                 </div>
                             </div>
 
@@ -264,8 +266,23 @@ function AddEmploye__5() {
                                         {...register("date")}
                                         required
                                     />
-                                    <span className="floating-label label-date">Date</span>
+                                    <span className="floating-label label-date">Date de décision</span>
                                 </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <input
+                                        type="text"
+                                        className="inputText"
+                                        {...register("decision")}
+                                        required
+                                    />
+                                    <span className="floating-label">Décision / contrat</span>
+                                    <p>{errors.nom?.message}</p>
+                                </div>
+                            </div>
+
+
+                            <div className="two-input">
                                 <div className="user-input-wrp">
                                     <br />
                                     <input
@@ -274,29 +291,33 @@ function AddEmploye__5() {
                                         {...register("gain")}
                                         required
                                     />
-                                    <span className="floating-label">Saisier Le gains</span>
+                                    <span className="floating-label">Ecart</span>
                                     <p>{errors.nom?.message}</p>
+                                </div>
+                                <div className="user-input-wrp">
+                                    <br />
+                                    <select className="inputText"  {...register("motif")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
+                                        <option selected disabled value="">Saisier Le motif</option>
+                                        <option value="Promotion">Promotion</option>
+                                        <option value="Avancement">Avancement</option>
+                                        <option value="Rétrogradation">Rétrogradation</option>
+                                        <option value="Réorganisation">Réorganisation</option>
+                                        <option value="Autres">Autres</option>
+                                    </select>
                                 </div>
                             </div>
 
-                            {/* <div className="user-input-wrp">
-                                <br />
-                                <input
-                                    type="text"
-                                    className="inputText"
-                                    {...register("motif")}
-                                    required
-                                />
-                                <span className="floating-label">Saisier Le motif</span>
-                            </div> */}
                             <div className="user-input-wrp">
                                 <br />
-                                <select className="inputText"  {...register("motif")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
-                                    <option selected disabled value="">Saisier Le motif</option>
-                                    <option value="Avancement">Avancement</option>
-                                    <option value="Promotion">Promotion</option>
-                                    <option value="Autre">Autre</option>
-                                </select>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    className="inputText"
+                                    {...register("primes")}
+                                    required
+                                />
+                                <span className="floating-label">Primes et intemnité</span>
+                                <p>{errors.nom?.message}</p>
                             </div>
 
                             <div className="btn-container">
