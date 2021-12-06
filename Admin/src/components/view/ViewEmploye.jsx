@@ -93,24 +93,23 @@ function ViewEmploye() {
     const todayDate_FinTable7 = todayFunction(date_finTable7)
     const todayDateTable8 = todayFunction(dateTable8)
 
-
     // Csv + Pdf
     const handleBtnExportPdf = (matricule) => {
-        const headers1 = [["Matricule", "Nom", "Prénom", "Address", "Unité"]];
-        const data1 = table1.map(elt => [elt.matricule, elt.nom, elt.prenom, elt.address, elt.region]);
-        const headers2 = [["Post occupé", "Structure", "Date_debut", "Date_fin", "Contrat"]];
+        const headers1 = [["Matricule", "Nom", "Prénom", "Lieu de Naissence", "Date de recrutememnt", "Address", "Sexe", "Unité"]];
+        const data1 = table1.map(elt => [elt.matricule, elt.nom, elt.prenom, elt.structure, todayFunction(elt.date_recrutement), elt.address, elt.sexe, elt.region]);
+        const headers2 = [["Fonction", "Structure", "Date de recrutememnt", "Date_fin", "Contrat"]];
         const data2 = table2.map(elt => [elt.post_oc, elt.employer, todayFunction(elt.date_debut), todayFunction(elt.date_fin), elt.contrat]);
         const headers3 = [["Post occupé", "Structure", "Date_debut", "Date_fin", "Type"]];
         const data3 = table3.map(elt => [elt.post_oc, elt.structure, todayFunction(elt.date_debut), todayFunction(elt.date_fin), elt.carriere]);
-        const headers4 = [["Intitule", "Organisme", "Date", "Duree", "Titre"]];
+        const headers4 = [["Thème de la Formation", "Formateur", "Du", "Au", "Titre"]];
         const data4 = table4.map(elt => [elt.intitule, elt.organisme, todayFunction(elt.date), elt.duree, elt.titre]);
-        const headers5 = [["Salaire Ini", "Salaire rev", "Date", "Gain", "Motif"]];
+        const headers5 = [["Salaire de base", "Nouveau Salaire de base", "Date", "Ecart", "Motif"]];
         const data5 = table5.map(elt => [elt.salaire_initial, elt.salaire_rev, todayFunction(elt.date), elt.gain, elt.motif]);
-        const headers6 = [["Designation", "Auteur", "Date effet", "Motif", "Degré"]];
+        const headers6 = [["Nouveau Post", "Nature", "Date effet", "Motif", "Degré"]];
         const data6 = table6.map(elt => [elt.designation, elt.auteur, todayFunction(elt.date), elt.griefs, elt.degree]);
-        const headers7 = [["Type d'absence", "Du", "Au", "Motif d'absence"]];
-        const data7 = table7.map(elt => [elt.absence_irr, todayFunction(elt.annee), todayFunction(elt.date_fin), elt.conge]);
-        const headers8 = [["Exercice", "Nature", "Date départ", "Date retour", "Duree", "Duree rest"]];
+        const headers7 = [["Type d'absence", "Nombre d'absence", "Du", "Au", "Motif d'absence"]];
+        const data7 = table7.map(elt => [elt.absence_irr, elt.absence_num, todayFunction(elt.annee), todayFunction(elt.date_fin), elt.conge]);
+        const headers8 = [["Exercice", "Nature", "Date départ", "Date retour", "Nombre de jours congé", "Nombre de jours restant"]];
         const data8 = table8.map(elt => [elt.designation, elt.nature, todayFunction(elt.date), todayFunction(elt.date_retour), elt.duree, elt.duree_rest]);
 
         let content1 = { startY: 25, head: headers1, body: data1 };
@@ -139,7 +138,6 @@ function ViewEmploye() {
         console.log(matricule)
     }
 
-
     return (
         <>
             <div class="roww" ref={roww} >
@@ -154,7 +152,7 @@ function ViewEmploye() {
                             :
                             <div className="employer-details">
                                 <div className="table-title">
-                                    <h3>Regeneraux</h3>
+                                    <h3>Informations Generales</h3>
                                 </div>
                                 <div class="table-container">
                                     <table id="testtable">
@@ -166,16 +164,41 @@ function ViewEmploye() {
                                                 <th>address</th>
                                                 <th>Situation</th>
                                                 <th>N: d'enfants</th>
-                                                <th>Ascendent</th>
                                                 <th>Date Naissance</th>
+                                                <th>Lieu de Naissence</th>
                                                 <th>Date Recrutement</th>
                                                 <th>Region</th>
-                                                <th>Diplome</th>
+                                                <th>PDF</th>
                                                 <th>Specialité</th>
                                                 <th>Sexe</th>
                                                 <th>Nationalité</th>
-                                                <th>Piece</th>
-                                                <th>PDF</th>
+
+                                                <th>Numéro acte de marriage</th>
+                                                <th>Numéro sécurité sociale</th>
+                                                <th>Nom jeune fille</th>
+                                                <th>Nom du conjoint(e)</th>
+                                                <th>Prénom du conjoint(e)</th>
+                                                <th>Nombre d'enfant scolarisé</th>
+                                                <th>Prénom du père</th>
+                                                <th>Nom de la mère</th>
+                                                <th>Prénom de la mère</th>
+                                                <th>Adresse mail</th>
+                                                <th>Téléphone</th>
+                                                <th>Salarié</th>
+                                                <th>Numéro mutuelle</th>
+                                                <th>Groupage</th>
+                                                <th>N° de compte</th>
+                                                <th>Intitule compte/banque salarié</th>
+                                                <th>Code banque entreprise</th>
+                                                <th>Intitule banque entreprise</th>
+                                                <th>Code agence CNAS</th>
+                                                <th>Numéro piece d'identité</th>
+                                                <th>Délivré le:(identité)</th>
+                                                <th>à:(identité)</th>
+                                                <th>Numéro passeport</th>
+                                                <th>Délivré le:(passeport)</th>
+                                                <th>à:(passeport)</th>
+                                                <th>Diplome</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -187,17 +210,41 @@ function ViewEmploye() {
                                                     <td> {row['address']} </td>
                                                     <td> {row['s_famille']}</td>
                                                     <td> {row['n_enfants']} </td>
-                                                    <td> {row['ascendant']} </td>
                                                     <td> {todayNaissance} </td>
+                                                    <td> {row['structure']} </td>
                                                     <td> {todayRecrutement} </td>
                                                     <td> {row['region']} </td>
-                                                    <td> {row['diplome']} </td>
+                                                    <td> <button className="btn btn-danger" onClick={() => handleBtnExportPdf(row['matricule'])}>Pdf</button> </td>
                                                     <td> {row['specialite']} </td>
                                                     <td> {row['sexe']} </td>
                                                     <td> {row['nationalite']} </td>
+                                                    <td> {row['mariage']} </td>
+                                                    <td> {row['piece_security']} </td>
+                                                    <td> {row['nom_fille']} </td>
+                                                    <td> {row['nom_conjoint']} </td>
+                                                    <td> {row['prenom_conjoint']} </td>
+                                                    <td> {row['nombreEnfants_scolarise']} </td>
+                                                    <td> {row['prenom_pere']} </td>
+                                                    <td> {row['nom_mere']} </td>
+                                                    <td> {row['prenom_mere']} </td>
+                                                    <td> {row['mail']} </td>
+                                                    <td> {row['telephone']} </td>
+                                                    <td> {row['salarie']} </td>
+                                                    <td> {row['mutuelle']} </td>
+                                                    <td> {row['groupage']} </td>
+                                                    <td> {row['compte']} </td>
+                                                    <td> {row['intitule_compte']} </td>
+                                                    <td> {row['code_banc']} </td>
+                                                    <td> {row['intitule_banc']} </td>
+                                                    <td> {row['code_agence']} </td>
                                                     <td> {row['piece']} </td>
+                                                    <td> {todayFunction(row['date_piece_du'])} </td>
+                                                    <td> {todayFunction(row['date_piece_au'])} </td>
+                                                    <td> {row['passeport']} </td>
+                                                    <td> {todayFunction(row['date_passeport_du'])} </td>
+                                                    <td> {todayFunction(row['date_passeport_au'])} </td>
+                                                    <td> {row['diplome']} </td>
                                                     {/* <td> <button className="btn btn-secondary" onClick={() => handleBtnExportCsv(row['matricule'])}>Csv</button> </td> */}
-                                                    <td> <button className="btn btn-danger" onClick={() => handleBtnExportPdf(row['matricule'])}>Pdf</button> </td>
                                                 </tr>
                                             })}
                                         </tbody>
@@ -205,73 +252,106 @@ function ViewEmploye() {
                                 </div>
 
                                 <div className="table-title">
-                                    <h3>Expérience Professional</h3>
+                                    <h3>Expérience Professionnelle</h3>
                                 </div>
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Matricule</th>
-                                            <th>Fonction</th>
-                                            <th>Structure</th>
-                                            <th>Date de recrutememnt</th>
-                                            <th>date fin</th>
-                                            <th>Contrat</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {table2.map(row => {
-                                            return <tr>
-                                                <td> {row['matricule']} </td>
-                                                <td> {row['post_oc']}   </td>
-                                                <td> {row['employer']}   </td>
-                                                <td> {todayFunction(row['date_debut'])}</td>
-                                                <td> {todayFunction(row['date_fin'])} </td>
-                                                <td> {row['contrat']}   </td>
+                                <div className="table-container">
+                                    <table id="testtable-2">
+                                        <thead>
+                                            <tr>
+                                                <th>Matricule</th>
+                                                <th>Fonction</th>
+                                                <th>Structure</th>
+                                                <th>Date de recrutememnt</th>
+                                                <th>date fin</th>
+                                                <th>Type de Contrat</th>
+                                                <th>Numéro du contrat</th>
+                                                <th>Date de départ</th>
+                                                <th>Date de reprise</th>
+                                                <th>Motif du Départ</th>
+                                                <th>Décision</th>
+                                                <th>Classe</th>
+                                                <th>Qualification</th>
+                                                <th>Salaire de base</th>
                                             </tr>
-                                        })}
-                                    </tbody>
-                                </table>
-
-                                <div className="table-title">
-                                    <h3>EvoCarriére</h3>
+                                        </thead>
+                                        <tbody>
+                                            {table2.map(row => {
+                                                return <tr>
+                                                    <td>{row['matricule']} </td>
+                                                    <td>{row['post_oc']}   </td>
+                                                    <td>{row['employer']}   </td>
+                                                    <td>{todayFunction(row['date_debut'])}</td>
+                                                    <td>{todayFunction(row['date_fin'])} </td>
+                                                    <td>{row['contrat']}</td>
+                                                    <td>{row['num_contrat']}</td>
+                                                    <td>{todayFunction(row['date_depart'])}</td>
+                                                    <td>{row['motif']}</td>
+                                                    <td>{todayFunction(row['date_reprise'])}</td>
+                                                    <td>{row['decision']}</td>
+                                                    <td>{row['classe']}</td>
+                                                    <td>{row['qualification']}</td>
+                                                    <td>{row['salaire']}</td>
+                                                </tr>
+                                            })}
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Matricule</th>
-                                            <th>Post Occupé</th>
-                                            <th>Structure</th>
-                                            <th>date debut</th>
-                                            <th>date fin</th>
-                                            <th>Type</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {table3.map(row => {
-                                            return <tr>
-                                                <td> {row['matricule']}</td>
-                                                <td> {row['post_oc']}</td>
-                                                <td> {row['structure']}</td>
-                                                <td> {todayFunction(row['date_debut'])}</td>
-                                                <td> {todayFunction(row['date_fin'])}</td>
-                                                <td> {row['carriere']}</td>
+                                <div className="table-title">
+                                    <h3>Gestion des Carriéres</h3>
+                                </div>
+                                <div className="table-container">
+                                    <table id="testtable-2">
+                                        <thead>
+                                            <tr>
+                                                <th>Matricule</th>
+                                                <th>Post Occupé</th>
+                                                <th>Structure</th>
+                                                <th>date debut</th>
+                                                <th>date fin</th>
+                                                <th>Motif du contrat</th>
+                                                <th>Décision</th>
+                                                <th>Nature de Contrat</th>
+                                                <th>Nombre d'années travaillés</th>
+                                                <th>Classe</th>
+                                                <th>Qualification</th>
+                                                <th>Salaire de base</th>
+                                                <th>Type de Carriére</th>
                                             </tr>
-                                        })}
-                                    </tbody>
-                                </table>
-
+                                        </thead>
+                                        <tbody>
+                                            {table3.map(row => {
+                                                return <tr>
+                                                    <td> {row['matricule']}</td>
+                                                    <td> {row['post_oc']}</td>
+                                                    <td> {row['structure']}</td>
+                                                    <td> {todayFunction(row['date_debut'])}</td>
+                                                    <td> {todayFunction(row['date_fin'])}</td>
+                                                    <td> {row['motif']}</td>
+                                                    <td> {row['decision']}</td>
+                                                    <td> {row['contrat']}</td>
+                                                    <td> {row['num_annee']}</td>
+                                                    <td> {row['classe']}</td>
+                                                    <td> {row['qualification']}</td>
+                                                    <td> {row['salaire']}</td>
+                                                    <td> {row['carriere']}</td>
+                                                </tr>
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div className="table-title">
-                                    <h3>Formation Professional</h3>
+                                    <h3>Formations Professionnelles</h3>
                                 </div>
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
                                             <th>Matricule</th>
-                                            <th>intitule</th>
-                                            <th>organisme</th>
-                                            <th>date</th>
-                                            <th>duree</th>
-                                            <th>titre</th>
+                                            <th>Thème de la Formation</th>
+                                            <th>Organisme Formateur</th>
+                                            <th>du</th>
+                                            <th>au</th>
+                                            <th>Saisier La Durée en mois</th>
+                                            <th>Diplôme Obtenu</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -281,6 +361,7 @@ function ViewEmploye() {
                                                 <td> {row['intitule']} </td>
                                                 <td> {row['organisme']} </td>
                                                 <td>{todayFunction(row['date'])}</td>
+                                                <td>{todayFunction(row['date_fin'])}</td>
                                                 <td> {row['duree']} </td>
                                                 <td> {row['titre']} </td>
                                             </tr>
@@ -289,17 +370,19 @@ function ViewEmploye() {
                                 </table>
 
                                 <div className="table-title">
-                                    <h3>RevSalariale</h3>
+                                    <h3>Revalorisation Salariale</h3>
                                 </div>
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
                                             <th>Matricule</th>
-                                            <th>salaire_initial</th>
-                                            <th>salaire_rev</th>
-                                            <th>date</th>
-                                            <th>gain</th>
-                                            <th>motif</th>
+                                            <th>Salaire de base</th>
+                                            <th>Nouveau Salaire de base</th>
+                                            <th>Date de décision</th>
+                                            <th>Décision/contrat</th>
+                                            <th>Ecart</th>
+                                            <th>Motif</th>
+                                            <th>Primes et intemnité</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -309,41 +392,52 @@ function ViewEmploye() {
                                                 <td> {row['salaire_initial']}</td>
                                                 <td> {row['salaire_rev']}</td>
                                                 <td> {todayFunction(row['date'])}</td>
+                                                <td> {row['decision']}</td>
                                                 <td> {row['gain']}</td>
                                                 <td> {row['motif']}</td>
+                                                <td> {row['primes']}</td>
                                             </tr>
                                         })}
                                     </tbody>
                                 </table>
 
                                 <div className="table-title">
-                                    <h3>Mesures Disciplinaire</h3>
+                                    <h3>Sanctions Disciplinaires</h3>
                                 </div>
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Matricule</th>
-                                            <th>designation</th>
-                                            <th>auteur</th>
-                                            <th>date effet</th>
-                                            <th>motif</th>
-                                            <th>degree</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {table6.map(row => {
-                                            return <tr>
-                                                <td> {row['matricule']}</td>
-                                                <td> {row['designation']}</td>
-                                                <td> {row['auteur']}</td>
-                                                <td> {todayFunction(row['date'])}</td>
-                                                <td> {row['griefs']}</td>
-                                                <td> {row['degree']}</td>
+                                <div className="table-container">
+                                    <table id="testtable-2">
+                                        <thead>
+                                            <tr>
+                                                <th>Matricule</th>
+                                                <th>Nouveau Post</th>
+                                                <th>Nature de la sanction</th>
+                                                <th>date effet</th>
+                                                <th>Motif de la sanction</th>
+                                                <th>Degré de la sanction</th>
+                                                <th>Nouveau classification</th>
+                                                <th>Nouveau Salaire de base</th>
+                                                <th>Durée retard échelon</th>
+                                                <th>Date de licenciment</th>
                                             </tr>
-                                        })}
-                                    </tbody>
-                                </table>
-
+                                        </thead>
+                                        <tbody>
+                                            {table6.map(row => {
+                                                return <tr>
+                                                    <td> {row['matricule']}</td>
+                                                    <td> {row['designation']}</td>
+                                                    <td> {row['auteur']}</td>
+                                                    <td> {todayFunction(row['date'])}</td>
+                                                    <td> {row['griefs']}</td>
+                                                    <td> {row['degree']}</td>
+                                                    <td> {row['classification']}</td>
+                                                    <td> {row['salaire']}</td>
+                                                    <td> {row['duree']}</td>
+                                                    <td> {row['date_licen']}</td>
+                                                </tr>
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div className="table-title">
                                     <h3>Assiduité</h3>
                                 </div>
@@ -352,6 +446,7 @@ function ViewEmploye() {
                                         <tr>
                                             <th>Matricule</th>
                                             <th>Type d'absence</th>
+                                            <th>Nombre d'absence</th>
                                             <th>Du</th>
                                             <th>Au</th>
                                             <th>Motif d'absence</th>
@@ -362,6 +457,7 @@ function ViewEmploye() {
                                             return <tr>
                                                 <td> {row['matricule']}</td>
                                                 <td> {row['absence_irr']}</td>
+                                                <td> {row['absence_num']}</td>
                                                 <td> {todayFunction(row['annee'])}</td>
                                                 <td> {todayFunction(row['date_fin'])}</td>
                                                 <td> {row['conge']}</td>
@@ -371,18 +467,18 @@ function ViewEmploye() {
                                 </table>
 
                                 <div className="table-title">
-                                    <h3>Gratification</h3>
+                                    <h3>Gestion des Congés</h3>
                                 </div>
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
                                             <th>Matricule</th>
                                             <th>Exercice</th>
-                                            <th>Nature</th>
+                                            <th>Nature du congé</th>
                                             <th>Date Départ</th>
                                             <th>Date retour</th>
-                                            <th>Duree</th>
-                                            <th>Duree rest</th>
+                                            <th>Nombre de jours congé</th>
+                                            <th>Nombre de jours restant</th>
                                         </tr>
                                     </thead>
                                     <tbody>

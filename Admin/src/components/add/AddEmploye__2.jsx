@@ -366,7 +366,7 @@ function AddEmploye__2() {
                                     <select className="inputText"  {...register("classe")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
                                         <option selected disabled value="">Classe</option>
                                         {row__1.map((classe, key) => {
-                                            return <option value={`${classe}`} key={key}>{classe <= 9 ? 0 + '' + classe : classe}</option>
+                                            return <option value={`${classe <= 9 ? '0' + classe : classe}`} key={key}>{classe <= 9 ? 0 + '' + classe : classe}</option>
                                         })}
                                     </select>
                                 </div>
@@ -375,7 +375,7 @@ function AddEmploye__2() {
                                     <select className="inputText"  {...register("qualification")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
                                         <option selected disabled value="">Qualification</option>
                                         {row__2.map((qualification, key) => {
-                                            return <option value={`${qualification}`} key={key}>{qualification <= 9 ? 0 + '' + qualification : qualification}</option>
+                                            return <option value={`${qualification <= 9 ? '0' + qualification : qualification}`} key={key}>{qualification <= 9 ? 0 + '' + qualification : qualification}</option>
                                         })}
                                     </select>
                                 </div>

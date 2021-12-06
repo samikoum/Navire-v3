@@ -1,0 +1,8 @@
+ console.log(typeof dateNaissance)
+        // val = val.toLowerCase()
+        const newTableFilter = employes.filter(
+            function (employe) {
+                console.log(todayUpdateFunction(employe.date_naissance))
+                return (todayUpdateFunction(employe.date_naissance).includes(dateNaissance))
+            })
+        setEmployes(newTableFilter)

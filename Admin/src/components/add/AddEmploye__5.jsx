@@ -238,6 +238,7 @@ function AddEmploye__5() {
                                     <br />
                                     <input
                                         type="number"
+                                        min="0"
                                         className="inputText"
                                         {...register("salaire_ini")}
                                         required
@@ -249,6 +250,7 @@ function AddEmploye__5() {
                                     <br />
                                     <input
                                         type="number"
+                                        min="0"
                                         className="inputText"
                                         {...register("salaire_reval")}
                                         required

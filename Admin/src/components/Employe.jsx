@@ -7,6 +7,7 @@ import NavAddEmploye from './navBar/NavAddEmploye';
 import Model from './delete/Model';
 import HeaderRight from './includes/HeaderRight';
 import ScrollToTop from './ScrollToTop'
+import FilterContainer from '../components/delete/FilterModel'
 
 // Matriel-table
 import MaterialTable from 'material-table';
@@ -31,6 +32,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DownloadIcon from '@mui/icons-material/Download';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+
+
 
 import { CSVLink } from "react-csv";
 import { jsPDF } from "jspdf";
@@ -84,11 +87,37 @@ function Employe() {
             field: "prenom",
             cellStyle: { padding: '8px' }
         },
+        // {
+        //     title: "Adresse",
+        //     field: "address",
+        //     sorting: false,
+        //     cellStyle: { padding: '8px', width: '25%' }
+        // },
         {
-            title: "Adresse",
-            field: "address",
-            sorting: false,
-            cellStyle: { padding: '8px', width: '25%' }
+            title: "Date de naissance",
+            field: "date_naissance",
+            type: "date",
+            cellStyle: { padding: '8px' },
+            headerStyle: { color: '#fff' },
+        },
+        {
+            title: "Lieu de naissance",
+            field: "structure",
+            cellStyle: { padding: '8px' },
+            headerStyle: { color: '#fff' },
+        },
+        {
+            title: "Sexe",
+            field: "sexe",
+            cellStyle: { padding: '8px' },
+            headerStyle: { color: '#fff' },
+        },
+        {
+            title: "Date de recrutememnt",
+            field: "date_recrutement",
+            type: "date",
+            cellStyle: { padding: '8px' },
+            headerStyle: { color: '#fff' },
         },
         {
             title: "Unité",
@@ -195,7 +224,11 @@ function Employe() {
                 </section>
                 <section className="coll-2 notif-employer" ref={coll__2}>
                     <HeaderRight />
-                    <div className="coll-2-container" >
+                    <div className="coll-2-container coll-2-container-filtering" >
+                        <FilterContainer 
+                            employes={employes}
+                            setEmployes={setEmployes}
+                        />
                         <div className="matrial-table-container">
                             <MaterialTable
                                 title="Gestion des Employers"
@@ -209,21 +242,21 @@ function Employe() {
                                     columnsButton: true,
                                     sorting: false,
                                     headerStyle: { background: '#222D32', color: '#fff', fontSize: '16px', padding: '12px 8px', },
-                                    rowStyle: (data, index) => index % 2 == 1 ? { background: '#dddddd', fontSize: '15px', } : { fontSize: '15px' },
+                                    rowStyle: (data, index) => index % 2 == 0 ? { background: '#dddddd', fontSize: '15px', } : { fontSize: '15px' },
                                     searchFieldStyle: { border: '1px solid #dddddd', padding: '5px 0px 5px 10px', borderRadius: '5px', marginRight: '8px' },
                                     actionsColumnIndex: -1,
-                                    // filtering: true
+                                    filtering: true
                                 }}
 
                                 actions={[
-                                    {
-                                        icon: () => <CSVLink className="csv-ling" filename={"employers.csv"} data={employes} headers={headers}>
-                                            <DownloadIcon style={{ color: '#757575' }} /></CSVLink>,
-                                        isFreeAction: true,
-                                        onClick: () => {
-                                            // handleBtnExport()
-                                        }
-                                    },
+                                    // {
+                                    //     icon: () => <CSVLink className="csv-ling" filename={"employers.csv"} data={employes} headers={headers}>
+                                    //         <DownloadIcon style={{ color: '#757575' }} /></CSVLink>,
+                                    //     isFreeAction: true,
+                                    //     onClick: () => {
+                                    //         // handleBtnExport()
+                                    //     }
+                                    // },
                                     {
                                         icon: () => <PictureAsPdfIcon style={{ color: '#757575' }} />,
                                         isFreeAction: true,

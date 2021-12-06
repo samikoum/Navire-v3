@@ -242,6 +242,7 @@ function AddEmploye__7() {
                                     <br />
                                     <input
                                         type="number"
+                                        min="0"
                                         className="inputText"
                                         {...register("absence_num")}
                                         required

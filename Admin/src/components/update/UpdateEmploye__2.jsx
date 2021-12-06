@@ -138,7 +138,6 @@ function UpdateEmploye__2() {
                                         required
                                         onChange={(e) => setpost(e.target.value)}
                                         value={post}
-
                                     />
                                     <span className="floating-label">Fonction</span>
                                     <p>{errors.nom?.message}</p>
@@ -146,10 +145,11 @@ function UpdateEmploye__2() {
                                 <div className="user-input-wrp">
                                     <br />
                                     <select className="inputText" onChange={(e) => setemployer(e.target.value)} value={employer} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
-                                        {/* <option selected disabled value={sexe}>{sexe}</option> */}
-                                        <option value="Structure__1">Structure__1</option>
-                                        <option value="Structure__2">Structure__2</option>
-                                        <option value="Structure__3">Structure__3</option>
+                                        <option selected disabled value="">Structure</option>
+                                        <option value="Cadre">Cadre</option>
+                                        <option value="Maitrise">Maitrise</option>
+                                        <option value="Exécution">Exécution</option>
+                                        <option value="Autres">Autres</option>
                                     </select>
                                 </div>
                             </div>

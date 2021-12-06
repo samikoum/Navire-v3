@@ -222,8 +222,8 @@ footer p {
   font-size: 15px !important;
 }
 
-/*---------------------Coll-2---------------------*/
-/*-----coll-2-header------*/
+/*-------------------------------------Coll-2----------------------------------------*/
+/*-------------Coll-2-header------------------*/
 .coll-2-header {
   position: relative;
   display: flex;
@@ -238,6 +238,68 @@ footer p {
 
 .coll-2-container {
   padding: 30px 16px;
+}
+
+.coll-2-container-filtering {
+  padding: 10px 16px;
+}
+
+/*------------------Coll-2-Filter-Container--------------*/
+.filter-container {
+  background: #FBFBFB;
+  position: relative;
+}
+
+.filter-container .filter-content {
+  height: 400px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 0 #dddddd;
+  margin-bottom: 10px;
+  padding: 10px 10px 0;
+
+}
+
+.filter-content.form-1 .two-input .user-input-wrp {
+  margin-right: 25px;
+}
+
+.filter-content.form-1 .two-input .user-input-wrp:last-child {
+  margin-right: 0;
+}
+
+.filter-content.form-1 .two-input button:first-of-type {
+  margin-right: 25px;
+}
+
+.btn-filter-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  cursor: pointer;
+  /* background: orange; */
+  width: max-content;
+  padding: 8px 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-filter-container h3 {
+  display: inline-block;
+}
+
+.btn-filter-container:active {
+  background: rgb(167, 165, 165);
+  border-radius: 5px;
+}
+
+.btn-filter {
+  margin-right: 5px;
+}
+
+.btn-save-filter {
+  position: absolute !important;
+  right: 10px;
+  bottom: 10px;
 }
 
 .coll-2-header .fa-bars {
@@ -286,7 +348,7 @@ footer p {
   font-size: 14px;
 }
 
-/*-----coll-2-container------*/
+/*-------------------Coll-2-Container---------------------*/
 .coll-2-container form {
   /* border: 1px solid red; */
   width: 60%;
@@ -516,7 +578,7 @@ table th {
   text-align: left;
   background-color: #222D32;
   color: white;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 td,
@@ -692,8 +754,13 @@ tr:last-of-type
 }
 
 #testtable {
-  width: 1500px;
+  width: 4500px;
 }
+
+#testtable-2 {
+  width: 2000px;
+}
+
 
 .mytable-wrapper h2 {
   color: blue;

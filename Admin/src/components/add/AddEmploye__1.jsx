@@ -249,8 +249,8 @@ function AddEmploye__1() {
                                     <br />
                                     <select className="inputText"  {...register("sexe")} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
                                         <option selected disabled value="">Sexe</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                        <option value="Masculin">Masculin</option>
+                                        <option value="Féminin">Féminin</option>
                                     </select>
                                 </div>
                                 <div className="user-input-wrp">

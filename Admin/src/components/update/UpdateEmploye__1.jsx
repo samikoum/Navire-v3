@@ -236,7 +236,7 @@ function UpdateEmploye__1() {
                                         onChange={(e) => setstructure(e.target.value)}
                                         value={structure}
                                     />
-                                    <span className="floating-label">Lieu de Naissence</span>
+                                    <span className="floating-label">Lieu de Naissance</span>
                                 </div>
                                 <div className="user-input-wrp">
                                     <br />
@@ -247,7 +247,7 @@ function UpdateEmploye__1() {
                                         onChange={(e) => setdateRecrutement(e.target.value)}
                                         value={dateRecrutement}
                                     />
-                                    <span className="floating-label label-date">Date de recrutememnt</span>
+                                    <span className="floating-label label-date">Date de recrutement</span>
                                 </div>
                             </div>
 
@@ -292,8 +292,8 @@ function UpdateEmploye__1() {
                                     <br />
                                     <select className="inputText" onChange={(e) => setsexe(e.target.value)} value={sexe} style={{ paddingTop: '14px', paddingBottom: '14px', height: '50px' }} id="selRegion" required >
                                         <option selected disabled value="">Sexe</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                        <option value="Masculin">Masculin</option>
+                                        <option value="Féminin">Féminin</option>
                                     </select>
                                 </div>
                                 <div className="user-input-wrp">
